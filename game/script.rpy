@@ -8,7 +8,6 @@
 default Otekku = Character('O\'Tekku-chan', image="otekku", color="#FFD700")
 default VGDev = Character('VGDev-san', image="vgdev", color="#64C617")
 default Buzz = Character('Buzz', image="buzz", color="#FFD700")
-default Zeil = Character('Zeil', image="zeil", color="#FFD700")
 # Game start
 label start:
     camera:
