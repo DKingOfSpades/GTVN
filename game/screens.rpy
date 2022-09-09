@@ -26,7 +26,10 @@ style gui_text:
 
 
 style button:
+    hover_sound "audio/sfx_ui_button.mp3"
+    activate_sound "audio/sfx_ui_button_select.mp3"
     properties gui.button_properties("button")
+
 
 style button_text is gui_text:
     properties gui.text_properties("button")

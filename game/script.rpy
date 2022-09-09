@@ -15,6 +15,7 @@ label start:
     scene bg tech tower:
         subpixel True blur 5.0
         xzoom 1.15 yzoom 1.15 zoom 1.5
+    play music "audio/bgm_waiting.mp3" fadein 1.0 volume 0.5
     "Welcome to the first demo for a dating sim featuring O'Tekku-chan and (hopefully) VGDev-san!"
     "This is a collab game between VGDev and Anime O’Tekku."
     "It will be a dating sim/visual novel that introduces players to the neat things around campus with a personalized tour with a lot of GT inside jokes and stuff, as you visit different notable spots in campus."
