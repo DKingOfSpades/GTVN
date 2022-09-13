@@ -1409,6 +1409,45 @@ style nvl_button:
 style nvl_button_text:
     properties gui.button_text_properties("nvl_button")
 
+## Text Input screen ##################################################################
+##
+## This screen for changing a variable using a dialouge box.
+## message: string to display as message
+## variable: name of variable to change in string format
+##
+## call screen text_input("<your message>", "<variable name>")
+##
+## GTVN Developed
+
+screen text_input(message, variable):
+    add "gui/overlay/confirm.png"
+    frame:
+        xpadding 75
+        ypadding 75
+        xalign 0.5
+        yalign 0.5
+        vbox:
+            xalign 0.5 # define location of the vbox (if you would type xalign 0 and yalign 0 it would appear in top left corner)
+            yalign 0.5 # link to all of positional properties: https://www.renpy.org/doc/html/style_properties.html#position-style-properties
+            spacing 20
+            label _(message):
+                style "confirm_prompt"
+                xalign 0.5
+                at transform: # animate the text
+                    alpha 0 # initial parameters
+                    pause 0.25 # a pause
+                    linear 2 alpha 1.0 # how it's changed (I used linear but here are all: https://www.renpy.org/doc/html/atl.html#warpers) then the time of the animation and then to what it is changed
+            input default "":# add input which will be below the text because it's in the vbox. In default you can type something that will be already typed when the screen will be shown
+                xalign 0.5
+                pixel_width(500)# limit variable size
+                value VariableInputValue(variable)# save the input to a variable
+
+            textbutton "OK":
+                xalign 0.5
+                action Return()# this screen is meant to be called
+                keysym('K_RETURN', 'K_KP_ENTER') # can also add keysym to activate it with a keyboard
+                activate_sound("audio/sfx_ui_button.mp3") # sound when clicked
+                hover_sound("audio/sfx_ui_button_select.mp3") #sound when hovered
 
 
 ################################################################################

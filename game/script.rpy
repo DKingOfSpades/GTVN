@@ -10,6 +10,7 @@ default VGDev = Character('VGDev-san', image="vgdev", color="#64C617")
 default Buzz = Character('Buzz', image="buzz", color="#FFD700")
 # Game start
 label start:
+    call intro_faset
     camera:
         perspective True
     scene bg tech tower:
@@ -34,24 +35,6 @@ label start:
     "Buzz will be an awesome wingman that’ll help you get with one of the love interests"
     hide buzz
     "We’ll be using RenPy as our engine, which includes almost all the bare essentials to a visual novel. The other work to do will be scripting/writing, music/sfx, and artwork. 5 endings planned so far, a route for each love interest, no love interest, a difficult to get Buzz route, and the hardest to get harem route."
-
-label player_name_selection:
-    "What is your name?"
-    default player_name = "George P. Burdell"
-menu:
-    "George P. Burdell":
-        jump player_name_a
-    "Georgia P. Burdell":
-        jump player_name_b
-
-label player_name_a:
-    jump player_name_selection_common
-
-label player_name_b:
-    $ player_name = "Georgia P. Burdell"
-    jump player_name_selection_common
-
-label player_name_selection_common:
     default affection = 2
 
     show otekku excited:
