@@ -1,5 +1,23 @@
 # FASET intro
 image oscar = "oscar.png"
+image oscar_glitch:
+    At("oscar.png", glitch)
+    pause 0.2
+    At("oscar.png", chromatic_offset)
+    pause 0.1
+    At("oscar.png", glitch)
+    pause 0.3
+    At("oscar.png", chromatic_offset)
+    pause 0.2
+    At("oscar.png", glitch)
+    pause 0.3
+    At("oscar.png", chromatic_offset)
+    pause 0.1
+    At("oscar.png", glitch)
+    pause 0.2
+    At("oscar.png", chromatic_offset)
+    pause 0.3
+    repeat
 
 label intro_faset:
     camera:
@@ -46,4 +64,17 @@ label player_major_selection:
     $ major = major.strip() # removes whitespace at the ends
 
     "Oscar" "Hmm, [major], quite the interesting major."
+    "Oscar" "Which freshman housing are you gonna be staying on campus? UwU. {p}Oh wait, I think decisions for that has already come out. {p}Let me check..."
+    default housing = renpy.random.choice(["Armstrong", "Brown", "Caldwell", "Cloudman", "Field", "Fitten", "Folk", "Freeman", "Fulmer", "Glenn", "Hanson", "Harris", "Harrison", "Hefner", "Hopkins", "Howell", "Matheson", "Montag", "Perry", "Smith", "Towers", "Woodruff"])
+    "Oscar" "Your hosing is... {p}{color=#0f0}{b}[housing]{/b}{/color}!"
+    "Oscar" "And finally, it's time to determine your classes! Let me just pull up the class registration site for you."
+    hide oscar
+    show oscar_glitch:
+        xpos 0.1 ypos 0.1 zoom 0.8
+    "Oscar" "Wait what? whats hap{glitch=50.0}peni{b}ng??? {/b}how i{b}s -.# ${/b}&?\W@-{/glitch}"
+    "{glitch=100.0}{b}Oscar{/b}{/glitch}" "{glitch=50.0}Aa{b}aaAAaAAAaaaAAA{w}AAaaaAaaaAAAAAa{/b} {p}somethi{w}ng is goin{w}g wro--{/glitch}"
+    hide oscar_glitch
+    show oscar:
+        xpos 0.1 ypos 0.1 zoom 0.8
+    "Oscar" "This is your new list of registered classes:"
     return
