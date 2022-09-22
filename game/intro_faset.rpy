@@ -88,7 +88,7 @@ label player_major_selection:
         to_say+= "{{/size}}".format()
     "Oscar" "[to_say]"
     "Oscar" "I'm really sorry that I ended up bugging out and you couldn't choose a decent schedule. {w}You being in one of the later FASET sections can really prevent you from getting times you want too, plus I'm getting a little too old for this job."
-    "Oscar" "But hey, I still remeber when I was a wee student like you... {w}sure the workload is hard, but don't be afraid of asking for help. {w}Maybe you can find some good friends to suppourt you?"
+    "Oscar" "But hey, I still remeber when I was a wee student like you... {w}sure the workload is hard, but don't be afraid of asking for help. {w}Maybe you can find some good friends to support you?"
     "Oscar" "Or maybe someone even more special than a friend? Believe it or not, I was quite frisky back in the day."
     "Oscar" "Well, it looks like the time is getting late, so I have to wish you farewell. I hope you do well enough in school to see me again for schedules the next semester! {w}(and maybe fix some of my technical problems before then)"
     return
