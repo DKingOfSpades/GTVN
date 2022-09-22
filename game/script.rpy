@@ -5,9 +5,10 @@
 
 # Declare characters. The color argument colorizes the
 # name of the character.
-default Otekku = Character('O\'Tekku-chan', image="otekku", color="#FFD700")
-default VGDev = Character('VGDev-san', image="vgdev", color="#64C617")
-default Buzz = Character('Buzz', image="buzz", color="#FFD700")
+init:
+    $ Otekku = Character('O\'Tekku-chan', image="otekku", color="#FFD700")
+    $ VGDev = Character('VGDev-san', image="vgdev", color="#64C617")
+    $ Buzz = Character('Buzz', image="buzz", color="#FFD700")
 # Game start
 label start:
     call intro_faset
