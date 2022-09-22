@@ -1,5 +1,23 @@
 # FASET intro
 image oscar = "oscar.png"
+image oscar_glitch:
+    At("oscar.png", glitch)
+    pause 0.2
+    At("oscar.png", chromatic_offset)
+    pause 0.1
+    At("oscar.png", glitch)
+    pause 0.3
+    At("oscar.png", chromatic_offset)
+    pause 0.2
+    At("oscar.png", glitch)
+    pause 0.3
+    At("oscar.png", chromatic_offset)
+    pause 0.1
+    At("oscar.png", glitch)
+    pause 0.2
+    At("oscar.png", chromatic_offset)
+    pause 0.3
+    repeat
 
 label intro_faset:
     camera:
@@ -46,4 +64,31 @@ label player_major_selection:
     $ major = major.strip() # removes whitespace at the ends
 
     "Oscar" "Hmm, [major], quite the interesting major."
+    "Oscar" "Which freshman housing are you gonna be staying on campus? UwU. {p}Oh wait, I think decisions for that has already come out. {p}Let me check..."
+    default housing = renpy.random.choice(["Armstrong", "Brown", "Caldwell", "Cloudman", "Field", "Fitten", "Folk", "Freeman", "Fulmer", "Glenn", "Hanson", "Harris", "Harrison", "Hefner", "Hopkins", "Howell", "Matheson", "Montag", "Perry", "Smith", "Towers", "Woodruff"])
+    "Oscar" "Your hosing is... {p}{color=#0f0}{b}[housing]{/b}{/color}!"
+    "Oscar" "And finally, it's time to determine your classes! Let me just pull up the class registration site for you."
+    hide oscar
+    show oscar_glitch:
+        xpos 0.1 ypos 0.1 zoom 0.8
+    "Oscar" "Wait what? whats hap{glitch=50.0}peni{b}ng??? {/b}how i{b}s -.# ${/b}&?\W@-{/glitch}"
+    "{glitch=100.0}{b}Oscar{/b}{/glitch}" "{glitch=50.0}Aa{b}aaAAaAAAaaaAAA{w}AAaaaAaaaAAAAAa{/b} {p}somethi{w}ng is goin{w}g wro--{/glitch}"
+    hide oscar_glitch
+    show oscar:
+        xpos 0.1 ypos 0.1 zoom 0.8
+    "Oscar" "This is your new list of registered classes:"
+    call faset_random_schedule
+    python:
+        to_say = "{{size=-5}}".format()
+        i = 0
+        for c in schedule:
+            to_say+= "{} during {} {}{{p}}".format(c.name, c.day_format, c.period)
+            i+=1
+        to_say = to_say[:len(to_say)-3]
+        to_say+= "{{/size}}".format()
+    "Oscar" "[to_say]"
+    "Oscar" "I'm really sorry that I ended up bugging out and you couldn't choose a decent schedule. {w}You being in one of the later FASET sections can really prevent you from getting times you want too, plus I'm getting a little too old for this job."
+    "Oscar" "But hey, I still remeber when I was a wee student like you... {w}sure the workload is hard, but don't be afraid of asking for help. {w}Maybe you can find some good friends to support you?"
+    "Oscar" "Or maybe someone even more special than a friend? Believe it or not, I was quite frisky back in the day."
+    "Oscar" "Well, it looks like the time is getting late, so I have to wish you farewell. I hope you do well enough in school to see me again for schedules the next semester! {w}(and maybe fix some of my technical problems before then)"
     return
