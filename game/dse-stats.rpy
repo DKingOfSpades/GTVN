@@ -30,7 +30,7 @@ init -100 python:
     # default: starting value for the stat
     # max: maximum value for the stat
     # hidden: Is this stat hidden from the user? Hidden stats will not be displayed in the stats screen.
-    def register_stat(name, var, default=0, max=100, hidden=False):
+    def register_stat(name, var, default=0, max=222, hidden=False):
         __dse_stats.append(__Stat(name, var, default, max, hidden))
 
 
