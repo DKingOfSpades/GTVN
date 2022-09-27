@@ -51,12 +51,15 @@ init -100 python:
     # stay within range.
     config.python_callbacks.append(normalize_stats)
 
+
+# GTVN: not to be used, except for debug
+#
 # Display the stats in a frame.
 # name -  display the stat's name
 # bar -   display a bar indicating the value of the stat
 # value - display the numerical value of the stat
 # max -   display the maximum value of the stat
-screen display_stats(name=True, bar=True, value=True, max=True):
+screen display_stats(name=True, bar=True, value=True, max=False):
     $ dse_stat_length = len(__dse_stats)
 
     #The number of rows is the number of stats that are not hidden
@@ -73,7 +76,9 @@ screen display_stats(name=True, bar=True, value=True, max=True):
         vbox:
             yalign 0.0
             xalign 0.5
-            label "Stats" xalign 0.5
+            hbox:
+                xalign 0.5
+                label "Stats"
 
             # Depending on what the user chooses to display, calculate how many columns we need
             $ num_columns = 0
@@ -100,7 +105,7 @@ screen display_stats(name=True, bar=True, value=True, max=True):
                             label s.name
 
                         if bar:
-                            bar value v range s.max xmaximum 150 xalign 0.0
+                            bar value v range s.max xmaximum 150 xalign 0.0 yalign 0.75
 
                         if value and max:
                             label ("%d/%d" % (v, s.max)) xalign 1.0
@@ -108,3 +113,7 @@ screen display_stats(name=True, bar=True, value=True, max=True):
                             label ("%d" % (v,)) xalign 1.0
                         elif max:
                             label ("%d" % (s.max,)) xalign 1.0
+
+            vbox:
+                xalign 0.5
+                textbutton "Close" action Hide("display_stats")

@@ -53,7 +53,7 @@ init:
     $ event("borrow_pen",
             # This takes place when we go to study, and we have an int
             # >= 50.
-            "act == 'study' and intelligence >= 50",
+            "act == 'study' and brain >= 50",
             # It runs only once.
             event.once(),
             # It requires the introduction event to have run at least
@@ -66,7 +66,7 @@ init:
             priority = 180)
 
     # The bookslide.
-    $ event("bookslide", "act == 'study' and intelligence == 100",
+    $ event("bookslide", "act == 'study' and brain == 100",
             event.once(), event.depends("borrow_pen"))
 
     # She makes us cookies.
@@ -82,13 +82,13 @@ init:
             event.depends('introduction'), event.once())
     $ event("cantcatchme", "act == 'exercise'",
             event.depends('catchme'), event.solo(), priority=190)
-    $ event("caughtme", "act == 'exercise' and strength >= 50",
+    $ event("caughtme", "act == 'exercise' and brawn >= 50",
             event.depends('catchme'), event.once())
-    $ event("together", "act == 'exercise' and strength >= 50",
+    $ event("together", "act == 'exercise' and brawn >= 50",
             event.depends('caughtme'), event.solo(), priority=180)
-    $ event("apart", "act == 'exercise' and strength < 50",
+    $ event("apart", "act == 'exercise' and brawn < 50",
             event.depends('caughtme'), event.solo(), priority=180)
-    $ event("pothole", "act == 'exercise' and strength >= 100",
+    $ event("pothole", "act == 'exercise' and brawn >= 100",
             event.depends('caughtme'), event.once())
     $ event("dontsee", "act == 'exercise'",
             event.depends('pothole'), event.solo(), priority=170)
@@ -96,7 +96,7 @@ init:
             event.depends('dontsee'), event.once())
 
     # Relaxed ending with no girls happens if we max out our hidden relaxation stat.
-    $ event("relaxed_ending", "act=='hang' and relaxation >= 100", event.once())
+    $ event("relaxed_ending", "act=='hang' and perception >= 100", event.once())
 
     # Ending with both girls only happens if we have seen both of their final events
     # This needs to be higher-priority than either girl's ending.
@@ -128,15 +128,15 @@ label class_bad:
 label cut1:
 
     "I cut class, and spend the morning goofing off instead."
-    $ intelligence -= 10
-    $ relaxation += 10
+    $ brain -= 10
+    $ perception += 10
 
     return
 
 label cut2:
 
     "I cut class, and spend the morning playing computer games."
-    $ relaxation += 10
+    $ perception += 10
 
     return
 
@@ -152,8 +152,8 @@ label study:
     "I head on down to the library, and start reading about the topics
      I should have been reading about in class."
 
-    $ intelligence += 10
-    $ relaxation -= 10
+    $ brain += 10
+    $ perception -= 10
     return
 
 label hang:
@@ -161,7 +161,7 @@ label hang:
     "I spend the afternoon hanging out with my friends, killing
      some time."
 
-    $ relaxation += 10
+    $ perception += 10
     return
 
 label exercise:
@@ -169,8 +169,8 @@ label exercise:
     "I decide to go out for a run through the town, to keep myself in
      shape."
 
-    $ strength += 10
-    $ relaxation -= 10
+    $ brawn += 10
+    $ perception -= 10
     return
 
 label play:
@@ -178,8 +178,8 @@ label play:
     "I pop a DVD into my video game console, and spend the evening
      rolling small cities up into balls."
 
-    $ strength -= 10
-    $ relaxation += 10
+    $ brawn -= 10
+    $ perception += 10
     return
 
 
@@ -251,8 +251,8 @@ label gg_studying:
     "I decide not to disturb her, and instead start reading my own
      book."
 
-    $ intelligence += 10
-    $ relaxation -= 10
+    $ brain += 10
+    $ perception -= 10
 
     return
 
@@ -307,8 +307,8 @@ label gg_smiling:
     "I decide not to disturb her, and instead start reading my own
      book."
 
-    $ intelligence += 10
-    $ relaxation -= 10
+    $ brain += 10
+    $ perception -= 10
 
     return
 
@@ -502,8 +502,8 @@ label cantcatchme:
     "She pulls out past me, and disappears into the distance. One day
      I'll catch up to her."
 
-    $ strength += 10
-    $ relaxation -= 10
+    $ brawn += 10
+    $ perception -= 10
 
     return
 
@@ -547,8 +547,8 @@ label caughtme:
 
     "I nod a third time, and we take off, running side by side."
 
-    $ strength += 10
-    $ relaxation -= 10
+    $ brawn += 10
+    $ perception -= 10
 
     return
 
@@ -563,7 +563,7 @@ label together:
     "Still, I can keep up with her for the rest of the run. And that's
      not bad."
 
-    $ strength += 10
+    $ brawn += 10
 
     return
 
@@ -582,8 +582,8 @@ label apart:
     "She's right, of course, and I redouble my efforts to try to keep
      up with her."
 
-    $ strength += 10
-    $ relaxation -= 10
+    $ brawn += 10
+    $ perception -= 10
     return
 
 label pothole:

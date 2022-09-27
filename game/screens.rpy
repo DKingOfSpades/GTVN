@@ -1416,7 +1416,7 @@ style nvl_button_text:
 
 ## Text Input screen ##################################################################
 ##
-## This screen for changing a variable using a dialouge box.
+## This screen is for changing a variable using a dialouge box.
 ## message: string to display as message
 ## variable: name of variable to change in string format
 ##
@@ -1453,6 +1453,21 @@ screen text_input(message, variable):
                 keysym('K_RETURN', 'K_KP_ENTER') # can also add keysym to activate it with a keyboard
                 activate_sound("audio/sfx_ui_button.mp3") # sound when clicked
                 hover_sound("audio/sfx_ui_button_select.mp3") #sound when hovered
+
+## Calendar screen ##################################################################
+##
+## This screen is to be displayed top right corner Persona style
+##
+## show screen calendar
+##
+## GTVN Developed
+
+screen calendar:
+    vbox:
+        text "[month]/[day]"
+
+        text "[theweekday] [period]"
+
 
 
 ################################################################################

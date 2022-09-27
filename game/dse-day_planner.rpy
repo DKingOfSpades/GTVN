@@ -16,7 +16,7 @@ init -100 python:
 
     # The period we're updating.
     __period = None
-    
+
     class __Period(object):
 
         def __init__(self, name, var):
@@ -28,7 +28,7 @@ init -100 python:
         __periods[name] = store.__period = __Period(name, var)
 
     __None = object()
-        
+
     def dp_choice(name, value=__None, enable="True", show="True"):
 
         if not __period:
@@ -36,28 +36,28 @@ init -100 python:
 
         if value is __None:
             value = name
-        
+
         __period.acts.append((name, value, enable, show))
 
     def __set_noncurried(var, value):
         setattr(store, var, value)
         return True
-        
+
     __set = renpy.curry(__set_noncurried)
-        
+
 # Our Day Planner displays the stats, and buttons for the user to choose
 # what to do during each period of time defined in "periods".
-screen day_planner(periods):  
+screen day_planner(periods):
     # indicate to Ren'Py engine that this is a choice point
     $ renpy.choice_for_skipping()
     frame:
-        style "dayplanner_frame"          
-        use display_stats(name=True, bar=True, value=True, max=True)
+        style "dayplanner_frame"
+        # use display_stats(name=True, bar=True, value=True, max=True)
         use display_planner(periods)
-            
-screen display_planner(periods):            
+
+screen display_planner(periods):
     frame:
-        style_group "dp"        
+        style_group "dp"
         vbox:
             text "Day Planner" yalign 0.0 xalign 0.5
             hbox:
@@ -72,27 +72,26 @@ screen display_planner(periods):
 
                         $ valid_choice = False
                         vbox:
-                            style "dp_choice_vbox"                                                    
+                            style "dp_choice_vbox"
                             for name, curr_val, enable, should_show in this_period.acts:
                                 $ show_this = eval(should_show)
                                 $ enable = eval(enable)
 
                                 $ selected = (selected_choice == curr_val)
-                        
+
                                 if show_this:
                                     if enable:
                                         textbutton name action SetField(store, this_period.var, curr_val)
                                     else:
                                         textbutton name
-            
+
                                 if show_this and enable and selected:
                                     $ valid_choice = True
 
                             if not valid_choice:
                                 $ can_continue = False
-                                    
+
             if (can_continue):
                 textbutton dp_done_title style "dp_done_button" action Return()
             else:
                 textbutton dp_done_title style "dp_done_button"
-
