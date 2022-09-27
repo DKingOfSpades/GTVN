@@ -3,8 +3,7 @@
 # Place under image scene or show to tint:
 # matrixcolor TintMatrix("<hexcode color>")
 
-# Declare characters. The color argument colorizes the
-# name of the character.
+
 init -100 python:
     register_stat("Brain", "brain")
     register_stat("Brawn", "brawn")
@@ -13,6 +12,8 @@ init -100 python:
     register_stat("Honey", "honey")
     register_stat("Fatigue", "fatigue", 0, 6)
     register_stat("Perception", "perception", hidden=True)
+    # all events in dse-events.rpy depend on this variable
+    ap = 0
 
     dp_period("Morning", "morning_act")
     dp_choice("Attend Class", "class")
@@ -33,6 +34,8 @@ init -100 python:
     dp_choice("Study", "study")
     dp_choice("Sleep", "sleep")
 
+# Declare characters. The color argument colorizes the
+# name of the character.
 init:
     $ Otekku = Character('O\'Tekku-chan', image="otekku", color="#FFD700")
     $ VGDev = Character('VGDev-san', image="vgdev", color="#64C617")
@@ -48,7 +51,7 @@ label start:
     scene bg tech tower:
         subpixel True blur 5.0
         xzoom 1.15 yzoom 1.15 zoom 1.5
-
+    $ AP = 10
 label day:
     $ show_date = False
     # Increment the day and check for month changes.
@@ -71,7 +74,8 @@ label day:
     # Now, we call the day planner, which may set the act variables
     # to new values. We call it with a list of periods that we want
     # to compute the values for.
-    call screen day_planner(["Morning", "Noon", "Evening", "Night"])
+
+    # call screen day_planner(["Morning", "Noon", "Evening", "Night"])
     window auto
 
 # We process each of the three periods of the day, in turn.
@@ -81,7 +85,7 @@ label morning:
     # picked up by the expression in the various events defined below.
     $ period = "Morning"
     $ show_date = True
-
+    call screen day_planner(["Morning"])
     $ act = morning_act
 
     # Execute the events for the morning.
@@ -104,7 +108,7 @@ label noon:
 
     $ period = "Noon"
     $ show_date = True
-
+    call screen day_planner(["Noon"])
     $ act = noon_act
 
     call events_run_period
@@ -118,7 +122,7 @@ label evening:
 
     $ period = "Evening"
     $ show_date = True
-
+    call screen day_planner(["Evening"])
     $ act = evening_act
 
     call events_run_period
@@ -134,7 +138,7 @@ label night:
 
     $ period = "Night"
     $ show_date = True
-
+    call screen day_planner(["Night"])
     $ act = evening_act
 
     call events_run_period

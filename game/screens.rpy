@@ -254,7 +254,7 @@ screen quick_menu():
             style_prefix "quick"
 
             xalign 0.5
-            yalign 1.0
+            yalign 0.975
 
             textbutton _("Back") action Rollback()
             textbutton _("History") action ShowMenu('history')
@@ -1456,7 +1456,7 @@ screen text_input(message, variable):
 
 ## Calendar screen ##################################################################
 ##
-## This screen is to be displayed top right corner Persona style
+## This screen is to be displayed top right corner Persona style, but not currently used, what is used is day_planner in schedule.rpy
 ##
 ## show screen calendar
 ##
