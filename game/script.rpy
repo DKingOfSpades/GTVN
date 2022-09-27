@@ -85,7 +85,7 @@ label morning:
     # picked up by the expression in the various events defined below.
     $ period = "Morning"
     $ show_date = True
-    call screen day_planner(["Morning"])
+    call screen day_planner("Morning")
     $ act = morning_act
 
     # Execute the events for the morning.
@@ -108,7 +108,7 @@ label noon:
 
     $ period = "Noon"
     $ show_date = True
-    call screen day_planner(["Noon"])
+    call screen day_planner("Noon")
     $ act = noon_act
 
     call events_run_period
@@ -122,7 +122,7 @@ label evening:
 
     $ period = "Evening"
     $ show_date = True
-    call screen day_planner(["Evening"])
+    call screen day_planner("Evening")
     $ act = evening_act
 
     call events_run_period
@@ -138,7 +138,7 @@ label night:
 
     $ period = "Night"
     $ show_date = True
-    call screen day_planner(["Night"])
+    call screen day_planner("Night")
     $ act = evening_act
 
     call events_run_period

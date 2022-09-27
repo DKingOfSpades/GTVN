@@ -47,49 +47,46 @@ init -100 python:
 
 # Our Day Planner displays the stats, and buttons for the user to choose
 # what to do during each period of time defined in "periods".
-screen day_planner(periods):
+screen day_planner(period):
     # indicate to Ren'Py engine that this is a choice point
     $ renpy.choice_for_skipping()
     frame:
         style "dayplanner_frame"
         # use display_stats(name=True, bar=True, value=True, max=True)
-        use display_planner(periods)
+        use display_planner(period)
 
-screen display_planner(periods):
+screen display_planner(period):
     frame:
         style_group "dp"
         vbox:
-            text "Day Planner" yalign 0.0 xalign 0.5
-            hbox:
-                $ can_continue = True
-                for p in periods:
-                    vbox:
-                        label p
-                        if p not in __periods:
-                            $ raise Exception("Period %r was never defined." % p)
-                        $ this_period = __periods[p]
-                        $ selected_choice = getattr(store, this_period.var)
+            spacing 10
+            $ can_continue = True
+            label period
+            if period not in __periods:
+                $ raise Exception("Period %r was never defined." % period)
+            $ this_period = __periods[period]
+            $ selected_choice = getattr(store, this_period.var)
 
-                        $ valid_choice = False
-                        vbox:
-                            style "dp_choice_vbox"
-                            for name, curr_val, enable, should_show in this_period.acts:
-                                $ show_this = eval(should_show)
-                                $ enable = eval(enable)
+            $ valid_choice = False
+            vbox:
+                spacing 0
+                for name, curr_val, enable, should_show in this_period.acts:
+                    $ show_this = eval(should_show)
+                    $ enable = eval(enable)
 
-                                $ selected = (selected_choice == curr_val)
+                    $ selected = (selected_choice == curr_val)
 
-                                if show_this:
-                                    if enable:
-                                        textbutton name action SetField(store, this_period.var, curr_val)
-                                    else:
-                                        textbutton name
+                    if show_this:
+                        if enable:
+                            textbutton name action SetField(store, this_period.var, curr_val) xpadding 50 xalign 0.5
+                        else:
+                            textbutton name
 
-                                if show_this and enable and selected:
-                                    $ valid_choice = True
+                    if show_this and enable and selected:
+                        $ valid_choice = True
 
-                            if not valid_choice:
-                                $ can_continue = False
+                if not valid_choice:
+                    $ can_continue = False
 
             if (can_continue):
                 textbutton dp_done_title style "dp_done_button" action Return()

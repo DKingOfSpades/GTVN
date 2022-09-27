@@ -1416,7 +1416,7 @@ style nvl_button_text:
 
 ## Text Input screen ##################################################################
 ##
-## This screen is for changing a variable using a dialouge box.
+## This screen is for changing a variable using a dialogue box.
 ## message: string to display as message
 ## variable: name of variable to change in string format
 ##
