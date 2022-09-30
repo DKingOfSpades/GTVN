@@ -61,34 +61,39 @@ screen display_planner(period):
         vbox:
             spacing 10
             $ can_continue = True
-            label period
+            if AP > 7:
+                label "Early [period]" xalign 0.5
+            elif AP > 3:
+                label period xalign 0.5
+            else:
+                label "Late [period]" xalign 0.5
             if period not in __periods:
                 $ raise Exception("Period %r was never defined." % period)
             $ this_period = __periods[period]
             $ selected_choice = getattr(store, this_period.var)
 
             $ valid_choice = False
-            vbox:
-                spacing 0
-                for name, curr_val, enable, should_show in this_period.acts:
-                    $ show_this = eval(should_show)
-                    $ enable = eval(enable)
 
-                    $ selected = (selected_choice == curr_val)
 
-                    if show_this:
-                        if enable:
-                            textbutton name action SetField(store, this_period.var, curr_val) xpadding 50 xalign 0.5
-                        else:
-                            textbutton name
+            for name, curr_val, enable, should_show in this_period.acts:
+                $ show_this = eval(should_show)
+                $ enable = eval(enable)
 
-                    if show_this and enable and selected:
-                        $ valid_choice = True
+                $ selected = (selected_choice == curr_val)
 
-                if not valid_choice:
-                    $ can_continue = False
+                if show_this:
+                    if enable:
+                        textbutton name xalign 0.5 action SetField(store, this_period.var, curr_val)
+                    else:
+                        textbutton name xalign 0.5
+
+                if show_this and enable and selected:
+                    $ valid_choice = True
+
+            if not valid_choice:
+                $ can_continue = False
 
             if (can_continue):
-                textbutton dp_done_title style "dp_done_button" action Return()
+                textbutton dp_done_title style "dp_done_button" action Return() xalign 0.5
             else:
-                textbutton dp_done_title style "dp_done_button"
+                textbutton dp_done_title style "dp_done_button" xalign 0.5

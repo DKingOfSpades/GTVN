@@ -136,25 +136,25 @@ label evening:
         jump evening
 
     $ AP = 10 - fatigue
-label night:
     $ fatigue+=1
-    # This is now the end of the day, and not a period in which
-    # events can be run. We put some boilerplate end-of-day text
-    # in here.
+label night:
+
     if check_skip_period():
         jump night
 
     $ period = "Night"
     $ show_date = True
     call screen day_planner("Night")
-    $ act = evening_act
+    $ act = night_act
 
     call events_run_period
 
     if AP > 0:
         jump night
 
-    "It's getting late, so I decide to go to sleep."
+    "Oh no, I accidentally pulled an allnighter..."
+
+    $ fatigue+=2
 
     # We call events_end_day to let it know that the day is done.
     call events_end_day
