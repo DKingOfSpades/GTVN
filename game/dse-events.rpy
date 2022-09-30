@@ -111,6 +111,8 @@ label class:
      teacher droning on about a wide range of topics, none of which
      are remotely interesting."
 
+    $ AP -= 3
+
     return
 
 # For test purposes only.
@@ -123,20 +125,26 @@ label class_bad:
 
     "This is really for testing purposes only."
 
+    $ AP -= 3
+
     return
 
 label cut1:
 
     "I cut class, and spend the morning goofing off instead."
+
     $ brain -= 10
     $ perception += 10
+    $ AP -= 3
 
     return
 
 label cut2:
 
     "I cut class, and spend the morning playing computer games."
+
     $ perception += 10
+    $ AP -= 3
 
     return
 
@@ -144,6 +152,7 @@ label fly:
 
     "I dream that I am flying to the moon, where I meet up with two girls..."
     "I wake up too late to go to class."
+    $ AP -= 3
 
     return
 
@@ -154,6 +163,8 @@ label study:
 
     $ brain += 10
     $ perception -= 10
+    $ AP -= 3
+
     return
 
 label hang:
@@ -162,6 +173,8 @@ label hang:
      some time."
 
     $ perception += 10
+    $ AP -= 3
+
     return
 
 label exercise:
@@ -171,6 +184,8 @@ label exercise:
 
     $ brawn += 10
     $ perception -= 10
+    $ AP -= 3
+
     return
 
 label play:
@@ -180,6 +195,8 @@ label play:
 
     $ brawn -= 10
     $ perception += 10
+    $ AP -= 3
+
     return
 
 
@@ -237,6 +254,8 @@ label introduction:
 
     "I don't think anyone pays much attention to it, however."
 
+    $ AP -= 3
+
     return
 
 
@@ -253,6 +272,8 @@ label gg_studying:
 
     $ brain += 10
     $ perception -= 10
+
+    $ AP -= 3
 
     return
 
@@ -295,6 +316,8 @@ label borrow_pen:
 
     "She says, and she goes back to studying."
 
+    $ AP -= 3
+
     return
 
 label gg_smiling:
@@ -309,6 +332,7 @@ label gg_smiling:
 
     $ brain += 10
     $ perception -= 10
+    $ AP -= 3
 
     return
 
@@ -363,6 +387,8 @@ label bookslide:
 
     "But it was definitely worth it."
 
+    $ AP -= 3
+
     #This will end the current period and skip the next one.
     jump events_skip_period
 
@@ -405,6 +431,8 @@ label cookies:
      happiest guy in the world."
 
     "At this, she can only blush."
+
+    $ AP -= 3
 
     return
 
@@ -487,6 +515,8 @@ label catchme:
 
     "Even though I'm jogging, she pulls away as if it is nothing."
 
+    $ AP -= 3
+
     return
 
 label cantcatchme:
@@ -504,6 +534,8 @@ label cantcatchme:
 
     $ brawn += 10
     $ perception -= 10
+
+    $ AP -= 3
 
     return
 
@@ -549,6 +581,7 @@ label caughtme:
 
     $ brawn += 10
     $ perception -= 10
+    $ AP -= 3
 
     return
 
@@ -564,6 +597,7 @@ label together:
      not bad."
 
     $ brawn += 10
+    $ AP -= 3
 
     return
 
@@ -584,6 +618,8 @@ label apart:
 
     $ brawn += 10
     $ perception -= 10
+    $ AP -= 3
+
     return
 
 label pothole:
@@ -643,6 +679,8 @@ label pothole:
 
     "But it was definitely worth it."
 
+    $ AP -= 3
+
     #This will end the current period and skip the next one.
     jump events_skip_period
 
@@ -656,6 +694,8 @@ label dontsee:
 
     "I finish the course that we usually take, but it's not the same
      without her."
+
+    $ AP -= 3
 
     return
 

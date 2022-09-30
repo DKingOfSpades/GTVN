@@ -13,7 +13,7 @@ init -100 python:
     register_stat("Fatigue", "fatigue", 0, 6)
     register_stat("Perception", "perception", hidden=True)
     # all events in dse-events.rpy depend on this variable
-    ap = 0
+    AP = 0
 
     dp_period("Morning", "morning_act")
     dp_choice("Attend Class", "class")
@@ -67,8 +67,6 @@ label day:
     $ noon_act = None
     $ evening_act = None
     $ night_act = None
-    $ narrator("What should I do today?", interact=False)
-    window show
 
 
     # Now, we call the day planner, which may set the act variables
@@ -76,9 +74,9 @@ label day:
     # to compute the values for.
 
     # call screen day_planner(["Morning", "Noon", "Evening", "Night"])
-    window auto
 
 # We process each of the three periods of the day, in turn.
+    $ AP = 10 - fatigue
 label morning:
 
     # Set these variables to appropriate values, so they can be
@@ -90,12 +88,16 @@ label morning:
 
     # Execute the events for the morning.
 
-
     call events_run_period
+
+    "AP: [AP]"
+
+    if AP > 0:
+        jump morning
 
     # That's it for the morning, so we fall through to the
     # afternoon.
-
+    $ AP = 10 - fatigue
 label noon:
 
     # It's possible that we will be skipping noon, if one
@@ -113,7 +115,10 @@ label noon:
 
     call events_run_period
 
+    if AP > 0:
+        jump noon
 
+    $ AP = 10 - fatigue
 label evening:
 
     # The evening is the same as the noon.
@@ -127,9 +132,12 @@ label evening:
 
     call events_run_period
 
+    if AP > 0:
+        jump evening
 
+    $ AP = 10 - fatigue
 label night:
-
+    $ fatigue+=1
     # This is now the end of the day, and not a period in which
     # events can be run. We put some boilerplate end-of-day text
     # in here.
@@ -142,6 +150,9 @@ label night:
     $ act = evening_act
 
     call events_run_period
+
+    if AP > 0:
+        jump night
 
     "It's getting late, so I decide to go to sleep."
 
