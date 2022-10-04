@@ -64,9 +64,15 @@ screen display_planner(period):
             if AP > 7:
                 label "Early [period]" xalign 0.5
             elif AP > 3:
-                label period xalign 0.5
+                if period == "Night":
+                    label "Midnight" xalign 0.5
+                else:
+                    label period xalign 0.5
             else:
-                label "Late [period]" xalign 0.5
+                if period == "Night":
+                    label "Before Dawn" xalign 0.5
+                else:
+                    label "Late [period]" xalign 0.5
             if period not in __periods:
                 $ raise Exception("Period %r was never defined." % period)
             $ this_period = __periods[period]

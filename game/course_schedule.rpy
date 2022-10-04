@@ -41,6 +41,7 @@ init -100 python:
 label faset_random_schedule:
     $ schedule = []
     $ day_period = [["MWF", "Morning"], ["MWF", "Noon"], ["MWF", "Evening"], ["TR", "Morning"], ["TR", "Noon"], ["TR", "Evening"]]
+    $ renpy.random.shuffle(day_period)
 
     $ eng = day_period.pop()
     $ eng_qlist = []

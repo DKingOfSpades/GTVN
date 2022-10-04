@@ -15,31 +15,55 @@ init -100 python:
     # all events in dse-events.rpy depend on this variable
     AP = 0
 
+    # Morning
     dp_period("Morning", "morning_act")
     dp_choice("Attend Class", "class")
     dp_choice("Cut Class", "cut")
 
+    dp_choice("Sleep In", "sleepin", show="fatigue > 0")
+    dp_choice("Travel", "travel")
+    dp_choice("Talk to ...", "talk")
+    dp_choice("Text ...", "text")
+    dp_choice("Call ...", "calling")
+    dp_choice("Discover", "discover")
+
     # This is an example of an event that should only show up under special circumstances
     dp_choice("Fly to the Moon", "fly", show="brain >= 100 and brawn >= 100")
 
+    # Noon
     dp_period("Noon", "noon_act")
     dp_choice("Study", "study")
     dp_choice("Hang Out", "hang")
 
+    dp_choice("Nap", "nap", show="fatigue > 0")
+    dp_choice("Travel", "travel")
+    dp_choice("Talk to ...", "talk")
+    dp_choice("Text ...", "text")
+    dp_choice("Call ...", "calling")
+    dp_choice("Discover", "discover")
+
+    # Evening
     dp_period("Evening", "evening_act")
     dp_choice("Exercise", "exercise")
     dp_choice("Play Games", "play")
 
+    dp_choice("Nap", "nap", show="fatigue > 0")
+    dp_choice("Travel", "travel")
+    dp_choice("Talk to ...", "talk")
+    dp_choice("Text ...", "text")
+    dp_choice("Call ...", "calling")
+    dp_choice("Discover", "discover")
+
+    # Night
     dp_period("Night", "night_act")
     dp_choice("Study", "study")
     dp_choice("Sleep", "sleep")
 
-# Declare characters. The color argument colorizes the
-# name of the character.
-init:
-    $ Otekku = Character('O\'Tekku-chan', image="otekku", color="#FFD700")
-    $ VGDev = Character('VGDev-san', image="vgdev", color="#64C617")
-    $ Buzz = Character('Buzz', image="buzz", color="#FFD700")
+    dp_choice("Travel", "travel")
+    dp_choice("Talk to ...", "talk")
+    dp_choice("Text ...", "text")
+    dp_choice("Call ...", "calling")
+    dp_choice("Discover", "discover")
 
 # Game start
 label start:
@@ -51,6 +75,7 @@ label start:
     scene bg tech tower:
         subpixel True blur 5.0
         xzoom 1.15 yzoom 1.15 zoom 1.5
+    play music "audio/bgm_waiting.mp3" fadein 1.0 volume 0.5
     $ AP = 10
 label day:
     $ show_date = False
@@ -82,6 +107,7 @@ label morning:
     # Set these variables to appropriate values, so they can be
     # picked up by the expression in the various events defined below.
     $ period = "Morning"
+    $ sleep_in_check = False
     $ show_date = True
     call screen day_planner("Morning")
     $ act = morning_act
@@ -93,6 +119,7 @@ label morning:
     "AP: [AP]"
 
     if AP > 0:
+        $ sleep_in_check = True
         jump morning
 
     # That's it for the morning, so we fall through to the
@@ -123,6 +150,7 @@ label evening:
 
     # The evening is the same as the noon.
     if check_skip_period():
+        $ fatigue+=1
         jump night
 
     $ period = "Evening"
@@ -140,15 +168,18 @@ label evening:
 label night:
 
     if check_skip_period():
-        jump night
+        $ AP = 2
 
     $ period = "Night"
+    $ sleep_check = False
     $ show_date = True
     call screen day_planner("Night")
     $ act = night_act
 
     call events_run_period
 
+    if sleep_check:
+        jump day
     if AP > 0:
         jump night
 
@@ -195,7 +226,7 @@ label night:
 label otekku_lunch_selection:
     show otekku shy:
     Otekku "I've been meaning to hang out with you for a while, since we've come back to campus and all."
-    default hungry = True
+    $ hungry = True
 menu:
     "Yeah sure, I'd be down to hang and eat, my treat.":
         jump otekku_lunch_a

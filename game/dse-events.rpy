@@ -5,7 +5,8 @@
 # TODO: add our events
 
 
-# Some characters that are used in events in the game.
+# Declare characters. The color argument colorizes the
+# name of the character.
 init:
     $ t = Character('Teacher')
     $ gg = Character('Glasses Girl', color=(192, 255, 192, 255))
@@ -13,6 +14,9 @@ init:
     $ bg = Character('Both Girls')
     $ narrator = Character(' ')
 
+    $ Otekku = Character('O\'Tekku-chan', image="otekku", color="#FFD700")
+    $ VGDev = Character('VGDev-san', image="vgdev", color="#64C617")
+    $ Buzz = Character('Buzz', image="buzz", color="#FFD700")
 
 init:
     # First up, we define some simple events for the various actions, that
@@ -27,6 +31,18 @@ init:
     $ event("hang", "act == 'hang'", event.solo(), priority=200)
     $ event("exercise", "act == 'exercise'", event.solo(), priority=200)
     $ event("play", "act == 'play'", event.solo(), priority=200)
+
+
+    $ event("nap1", "act == 'nap'", event.choose_one('nap'), priority=200)
+    $ event("nap2", "act == 'nap'", event.choose_one('nap'), priority=200)
+    $ event("nap3", "act == 'nap' and fatigue > 2", event.choose_one('nap'), priority=200)
+    $ event("travel", "act == 'travel'", event.only(), priority=200)
+    $ event("talk", "act == 'talk'", event.only(), priority=200)
+    $ event("text", "act == 'text'", event.only(), priority=200)
+    $ event("calling", "act == 'calling'", event.only(), priority=200)
+    $ event("discover", "act == 'discover'", event.only(), priority=200)
+    $ event("sleep", "act == 'sleep'", event.only(), priority=200)
+    $ event("sleepin", "act == 'sleepin'", event.only(), priority=200)
 
 
     # This is an introduction event, that runs once when we first go
@@ -105,12 +121,137 @@ init:
             event.once(), priority = 50)
 
 
+# GTVN events
+label nap1:
+
+    "A little nap can't hurt, can it?"
+    $ fatigue -= 2
+
+    "This time, I got so much energy back!"
+
+    $ AP -= renpy.random.randint(3, 7)
+
+    return
+
+label nap2:
+
+    "A little nap can't hurt, can it?"
+    $ fatigue -= 1
+
+    "I feel a little better rested at least."
+
+    $ AP -= renpy.random.randint(1, 5)
+
+    return
+
+label nap3:
+
+    "A little nap can't hurt, can it?"
+    $ fatigue -= 2
+
+    # This will end the current period and skip the next one.
+    jump events_skip_period
+
+    "Oh god, what is the time?!?! Did I oversleep?"
+    $ AP = 10 - fatigue
+
+    return
+
+label travel:
+
+    "not yet implemented, but we'll be decreasing your time anyways because lets just assume you are traveling to another place"
+
+    "todo: add map and selectable locations, also make events dependent on current location"
+
+    "once you travel somewhere, it will tell you what characters are there at the moment as well"
+
+    $ AP -= 1
+
+    return
+
+label talk:
+
+    "Who would you like to talk to?"
+
+    "todo: choice dialougue screen for the different available npc options located at your location"
+
+    "then trigger an event inside another event"
+
+    $ AP -= 0
+
+    return
+
+label text:
+
+    "Who would you like to text?"
+
+    "todo: choice dialougue screen for the different available npc options to text"
+
+    "then trigger an event inside another event"
+
+    $ AP -= 1
+
+    return
+
+label calling:
+
+    "Who would you like to call?"
+
+    "todo: choice dialougue screen for the different available npc options to call"
+
+    "then trigger an event inside another event"
+
+    $ AP -= 2
+
+    return
+
+label discover:
+
+    "not yet implemented, but will have you either meet a new character or discover a new location on the map"
+
+    "if there are no more locations to be discovered, return nothing"
+
+    $ AP -= 2
+
+    return
+
+label sleep:
+
+    if AP > 4:
+        "Might as well go to sleep early, to get some more energy for tomorrow."
+        $ fatigue -= 2
+    else:
+        "I guess I'll plop into my bed and get ready for a good night's sleep."
+        $ fatigue -= 1
+
+    # We call events_end_day to let it know that the day is done.
+    call events_end_day
+
+    $ sleep_check = True
+
+    return
+
+label sleepin:
+
+
+    "I don't really feel like doing much this morning, so let's just sleep in."
+    $ fatigue -= 1
+
+    # This will end the current period.
+    call events_end_period
+
+    $ sleep_in_check = True
+
+    return
+
+# DSE events
 label class:
 
     "I make it to class just in time, and proceed to listen to the
      teacher droning on about a wide range of topics, none of which
      are remotely interesting."
 
+    $ brain += 10
     $ AP -= 3
 
     return
@@ -172,7 +313,7 @@ label hang:
     "I spend the afternoon hanging out with my friends, killing
      some time."
 
-    $ perception += 10
+    $ charm += 10
     $ AP -= 3
 
     return

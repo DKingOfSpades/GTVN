@@ -69,8 +69,8 @@ screen display_stats(name=True, bar=True, value=True, max=False):
 
     frame:
         style_group "dse_stats"
-        yalign 0.0
-        xalign 0.5
+        yalign 0.1
+        xalign 0.1
 
 
         vbox:
