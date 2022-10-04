@@ -254,7 +254,7 @@ screen quick_menu():
             style_prefix "quick"
 
             xalign 0.5
-            yalign 0.975
+            yalign 0.9875
 
             textbutton _("Back") action Rollback()
             textbutton _("Stats") action Show("display_stats")
