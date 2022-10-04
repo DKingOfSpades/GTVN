@@ -43,6 +43,7 @@ init:
     $ event("discover", "act == 'discover'", event.only(), priority=200)
     $ event("sleep", "act == 'sleep'", event.only(), priority=200)
     $ event("sleepin", "act == 'sleepin'", event.only(), priority=200)
+    $ event("eat", "act == 'eat'", event.solo(), priority=200)
 
 
     # This is an introduction event, that runs once when we first go
@@ -241,6 +242,18 @@ label sleepin:
     call events_end_period
 
     $ sleep_in_check = True
+
+    return
+
+label eat:
+
+    "not yet implemented"
+
+    "You eat at the Nave dining hall. It was mediocre at best, like usual."
+
+    "You leave feeling satiated."
+
+    $ AP -= 2
 
     return
 

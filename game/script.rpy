@@ -17,9 +17,12 @@ init -100 python:
 
     # Morning
     dp_period("Morning", "morning_act")
-    dp_choice("Attend Class", "class")
     dp_choice("Cut Class", "cut")
 
+    dp_choice("Attend Class", "class")
+    dp_choice("Eat", "eat")
+    dp_choice("Study", "study")
+    dp_choice("Exercise", "exercise")
     dp_choice("Sleep In", "sleepin", show="fatigue > 0")
     dp_choice("Travel", "travel")
     dp_choice("Talk to ...", "talk")
@@ -32,9 +35,12 @@ init -100 python:
 
     # Noon
     dp_period("Noon", "noon_act")
-    dp_choice("Study", "study")
     dp_choice("Hang Out", "hang")
 
+    dp_choice("Listen to Lecture", "class")
+    dp_choice("Eat", "eat")
+    dp_choice("Study", "study")
+    dp_choice("Exercise", "exercise")
     dp_choice("Nap", "nap", show="fatigue > 0")
     dp_choice("Travel", "travel")
     dp_choice("Talk to ...", "talk")
@@ -44,9 +50,12 @@ init -100 python:
 
     # Evening
     dp_period("Evening", "evening_act")
-    dp_choice("Exercise", "exercise")
     dp_choice("Play Games", "play")
 
+    dp_choice("Attend Lecture", "class")
+    dp_choice("Eat", "eat")
+    dp_choice("Study", "study")
+    dp_choice("Exercise", "exercise")
     dp_choice("Nap", "nap", show="fatigue > 0")
     dp_choice("Travel", "travel")
     dp_choice("Talk to ...", "talk")
@@ -59,6 +68,9 @@ init -100 python:
     dp_choice("Study", "study")
     dp_choice("Sleep", "sleep")
 
+    dp_choice("Eat", "eat")
+    dp_choice("Study", "study")
+    dp_choice("Exercise", "exercise")
     dp_choice("Travel", "travel")
     dp_choice("Talk to ...", "talk")
     dp_choice("Text ...", "text")
