@@ -10,6 +10,7 @@ default VGDev = Character('VGDev-san', image="vgdev", color="#64C617")
 default Buzz = Character('Buzz', image="buzz", color="#FFD700")
 # Game start
 label start:
+    $ current_location = ""
     call intro_faset
     camera:
         perspective True
