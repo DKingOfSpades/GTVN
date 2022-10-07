@@ -34,6 +34,7 @@ lint.txt
 saves/
 tmp/
 cache/
+actioneditor/
 
 # Executables.
 /renpy.exe
@@ -120,5 +121,18 @@ CubismSdkForNative-4-*.zip
 # Works in progress, throwaway scripts, etc.
 /scratch
 /*-dists
+
+# Draw.io diagrams
 *.bkp
 *.dtmp
+
+# Action Editor, download on your system individually, does not seem to work with linux devices
+00warper.rpy
+ATL_functions.rpy
+ActionEditor.rpy
+ActionEditor_config.rpy
+ActionEditor_screens.rpy
+image_viewer.rpy
+keymap.rpy
+menu_screen.rpy
+sound_viewer.rpy

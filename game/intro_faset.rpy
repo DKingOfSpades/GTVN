@@ -25,7 +25,7 @@ label intro_faset:
     scene bg culc lecture:
         subpixel True
         xzoom 1.75 yzoom 1.75 zoom 1.5
-    play music "audio/bgm_waiting.mp3" fadein 1.0 volume 0.5
+    play music "audio/bgm_OSCAR.mp3" fadein 1.0 volume 0.5
     "Only a few more weeks until your first class at Tech!"
     "Since you are a first year, you were invited to come to the FASET orientation. It's your last day of orientation in fact, so its time to register for classes!"
     "Many students were able to do FASET orientation before you, so you might have gotten the short end of the stick. Let's just hope that you are least able to grab some useful and major related classes at some convienient times."
@@ -36,8 +36,8 @@ label intro_faset:
 label player_name_selection:
     "First, what is your name?"
     hide oscar
-    default player_name = "George P. Burdell"
-    default first_name = "George"
+    $ player_name = "George P. Burdell"
+    $ first_name = "George"
     menu:
         "George P. Burdell":
             jump player_name_a
@@ -65,7 +65,7 @@ label player_major_selection:
 
     "Oscar" "Hmm, [major], quite the interesting major."
     "Oscar" "Which freshman housing are you gonna be staying on campus? UwU. {p}Oh wait, I think decisions for that has already come out. {p}Let me check..."
-    default housing = renpy.random.choice(["Armstrong", "Brown", "Caldwell", "Cloudman", "Field", "Fitten", "Folk", "Freeman", "Fulmer", "Glenn", "Hanson", "Harris", "Harrison", "Hefner", "Hopkins", "Howell", "Matheson", "Montag", "Perry", "Smith", "Towers", "Woodruff"])
+    $ housing = renpy.random.choice(["Armstrong", "Brown", "Caldwell", "Cloudman", "Field", "Fitten", "Folk", "Freeman", "Fulmer", "Glenn", "Hanson", "Harris", "Harrison", "Hefner", "Hopkins", "Howell", "Matheson", "Montag", "Perry", "Smith", "Towers", "Woodruff"])
     "Oscar" "Your hosing is... {p}{color=#0f0}{b}[housing]{/b}{/color}!"
     "Oscar" "And finally, it's time to determine your classes! Let me just pull up the class registration site for you."
     hide oscar

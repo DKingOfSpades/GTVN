@@ -3,19 +3,211 @@
 # Place under image scene or show to tint:
 # matrixcolor TintMatrix("<hexcode color>")
 
-# Declare characters. The color argument colorizes the
-# name of the character.
-default Otekku = Character('O\'Tekku-chan', image="otekku", color="#FFD700")
-default VGDev = Character('VGDev-san', image="vgdev", color="#64C617")
-default Buzz = Character('Buzz', image="buzz", color="#FFD700")
+
+init -100 python:
+    register_stat("Brain", "brain")
+    register_stat("Brawn", "brawn")
+    register_stat("Charm", "charm")
+    register_stat("Guts", "guts")
+    register_stat("Honey", "honey")
+    register_stat("Fatigue", "fatigue", 0, 6)
+    register_stat("Perception", "perception", hidden=True)
+    # all events in dse-events.rpy depend on this variable
+    AP = 0
+
+    # Morning
+    dp_period("Morning", "morning_act")
+    dp_choice("Cut Class", "cut")
+
+    dp_choice("Attend Class", "class")
+    dp_choice("Eat", "eat")
+    dp_choice("Study", "study")
+    dp_choice("Exercise", "exercise")
+    dp_choice("Sleep In", "sleepin", show="fatigue > 0")
+    dp_choice("Travel", "travel")
+    dp_choice("Talk to ...", "talk")
+    dp_choice("Text ...", "text")
+    dp_choice("Call ...", "calling")
+    dp_choice("Discover", "discover")
+
+    # This is an example of an event that should only show up under special circumstances
+    dp_choice("Fly to the Moon", "fly", show="brain >= 100 and brawn >= 100")
+
+    # Noon
+    dp_period("Noon", "noon_act")
+    dp_choice("Hang Out", "hang")
+
+    dp_choice("Listen to Lecture", "class")
+    dp_choice("Eat", "eat")
+    dp_choice("Study", "study")
+    dp_choice("Exercise", "exercise")
+    dp_choice("Nap", "nap", show="fatigue > 0")
+    dp_choice("Travel", "travel")
+    dp_choice("Talk to ...", "talk")
+    dp_choice("Text ...", "text")
+    dp_choice("Call ...", "calling")
+    dp_choice("Discover", "discover")
+
+    # Evening
+    dp_period("Evening", "evening_act")
+    dp_choice("Play Games", "play")
+
+    dp_choice("Attend Lecture", "class")
+    dp_choice("Eat", "eat")
+    dp_choice("Study", "study")
+    dp_choice("Exercise", "exercise")
+    dp_choice("Nap", "nap", show="fatigue > 0")
+    dp_choice("Travel", "travel")
+    dp_choice("Talk to ...", "talk")
+    dp_choice("Text ...", "text")
+    dp_choice("Call ...", "calling")
+    dp_choice("Discover", "discover")
+
+    # Night
+    dp_period("Night", "night_act")
+    dp_choice("Study", "study")
+    dp_choice("Sleep", "sleep")
+
+    dp_choice("Eat", "eat")
+    dp_choice("Study", "study")
+    dp_choice("Exercise", "exercise")
+    dp_choice("Travel", "travel")
+    dp_choice("Talk to ...", "talk")
+    dp_choice("Text ...", "text")
+    dp_choice("Call ...", "calling")
+    dp_choice("Discover", "discover")
+
 # Game start
 label start:
+    # Initialize the default values of some of the variables used in
+    # the game.
+
     call intro_faset
-    camera:
-        perspective True
+
     scene bg tech tower:
         subpixel True blur 5.0
         xzoom 1.15 yzoom 1.15 zoom 1.5
+    play music "audio/bgm_waiting.mp3" fadein 1.0 volume 0.5
+    $ AP = 10
+label day:
+    $ show_date = False
+    # Increment the day and check for month changes.
+    call next_day_check
+
+    # Here, we want to set up some of the default values for the
+    # day planner. In a more complicated game, we would probably
+    # want to add and remove choices from the dp_ variables
+    # (especially dp_period_acts) to reflect the choices the
+    # user has available.
+
+    $ morning_act = None
+    $ noon_act = None
+    $ evening_act = None
+    $ night_act = None
+
+
+    # Now, we call the day planner, which may set the act variables
+    # to new values. We call it with a list of periods that we want
+    # to compute the values for.
+
+    # call screen day_planner(["Morning", "Noon", "Evening", "Night"])
+
+# We process each of the three periods of the day, in turn.
+    $ AP = 10 - fatigue
+label morning:
+
+    # Set these variables to appropriate values, so they can be
+    # picked up by the expression in the various events defined below.
+    $ period = "Morning"
+    $ sleep_in_check = False
+    $ show_date = True
+    call screen day_planner("Morning")
+    $ act = morning_act
+
+    # Execute the events for the morning.
+
+    call events_run_period
+
+    "AP: [AP]"
+
+    if AP > 0:
+        $ sleep_in_check = True
+        jump morning
+
+    # That's it for the morning, so we fall through to the
+    # afternoon.
+    $ AP = 10 - fatigue
+label noon:
+
+    # It's possible that we will be skipping noon, if one
+    # of the events in the morning jumped to skip_next_period. If
+    # so, we should skip the noon.
+    if check_skip_period():
+        jump evening
+
+    # The rest of this is the same as for the morning.
+
+    $ period = "Noon"
+    $ show_date = True
+    call screen day_planner("Noon")
+    $ act = noon_act
+
+    call events_run_period
+
+    if AP > 0:
+        jump noon
+
+    $ AP = 10 - fatigue
+label evening:
+
+    # The evening is the same as the noon.
+    if check_skip_period():
+        $ fatigue+=1
+        jump night
+
+    $ period = "Evening"
+    $ show_date = True
+    call screen day_planner("Evening")
+    $ act = evening_act
+
+    call events_run_period
+
+    if AP > 0:
+        jump evening
+
+    $ AP = 10 - fatigue
+    $ fatigue+=1
+label night:
+
+    if check_skip_period():
+        $ AP = 2
+
+    $ period = "Night"
+    $ sleep_check = False
+    $ show_date = True
+    call screen day_planner("Night")
+    $ act = night_act
+
+    call events_run_period
+
+    if sleep_check:
+        jump day
+    if AP > 0:
+        jump night
+
+    "Oh no, I accidentally pulled an allnighter..."
+
+    $ fatigue+=2
+
+    # We call events_end_day to let it know that the day is done.
+    call events_end_day
+
+    # And we jump back to day to start the next day. This goes
+    # on forever, until an event ends the game.
+    jump day
+
+    camera:
+        perspective True
     play music "audio/bgm_waiting.mp3" fadein 1.0 volume 0.5
     "Welcome to the first demo for a dating sim featuring O'Tekku-chan and VGDev-san!"
     "This is a collab game between VGDev and Anime O’Tekku."
@@ -35,7 +227,7 @@ label start:
     "Buzz will be an awesome wingman that’ll help you get with one of the love interests"
     hide buzz
     "We’ll be using RenPy as our engine, which includes almost all the bare essentials to a visual novel. The other work to do will be scripting/writing, music/sfx, and artwork. 5 endings planned so far, a route for each love interest, no love interest, a difficult to get Buzz route, and the hardest to get harem route."
-    default affection = 2
+    $ affection = 2
 
     show otekku excited:
         subpixel True anchor (-550, -179) zoom 1.5
@@ -46,7 +238,7 @@ label start:
 label otekku_lunch_selection:
     show otekku shy:
     Otekku "I've been meaning to hang out with you for a while, since we've come back to campus and all."
-    default hungry = True
+    $ hungry = True
 menu:
     "Yeah sure, I'd be down to hang and eat, my treat.":
         jump otekku_lunch_a
