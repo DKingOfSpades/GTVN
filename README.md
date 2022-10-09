@@ -7,3 +7,4 @@ Instructions for new developers coming in from VGDev, AnimeOTekku, and other GT 
 2. In the renpydev folder where you installed Renpy, clone this repo into a single folder (like /renpydev/GTVN/)
 3. Join the Trello workspace for managing the project and tasks: [Click Here](https://trello.com/invite/gtvn2/0f0568d2575bb361f938beb2a117a68b)
 4. Check out the Google Drive for materials a little large to distribute on GitHub, character profiles, concept art, and other things that should not be available in the game: [Click Here](https://drive.google.com/drive/folders/17EYbmlJ7OwpAlKUSk3oYbuaxtcsirwK4?usp=sharing)
+5. If you want to use the Action Editor addon, you'll need to install separately, since it is incompatible with Linux machines. Put it in the game/actioneditor/ directory: [Click Here](https://github.com/kyouryuukunn/renpy-ActionEditor3)

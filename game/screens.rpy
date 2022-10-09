@@ -254,9 +254,10 @@ screen quick_menu():
             style_prefix "quick"
 
             xalign 0.5
-            yalign 1.0
+            yalign 0.9875
 
             textbutton _("Back") action Rollback()
+            textbutton _("Stats") action Show("display_stats")
             textbutton _("History") action ShowMenu('history')
             textbutton _("Skip") action Skip() alternate Skip(fast=True, confirm=True)
             textbutton _("Auto") action Preference("auto-forward", "toggle")
@@ -1416,7 +1417,7 @@ style nvl_button_text:
 
 ## Text Input screen ##################################################################
 ##
-## This screen for changing a variable using a dialouge box.
+## This screen is for changing a variable using a dialogue box.
 ## message: string to display as message
 ## variable: name of variable to change in string format
 ##
@@ -1453,6 +1454,21 @@ screen text_input(message, variable):
                 keysym('K_RETURN', 'K_KP_ENTER') # can also add keysym to activate it with a keyboard
                 activate_sound("audio/sfx_ui_button_select.mp3") # sound when clicked
                 hover_sound("audio/sfx_ui_button.mp3") #sound when hovered
+
+## Calendar screen ##################################################################
+##
+## This screen is to be displayed top right corner Persona style, but not currently used, what is used is day_planner in schedule.rpy
+##
+## show screen calendar
+##
+## GTVN Developed
+
+screen calendar:
+    vbox:
+        text "[month]/[day]"
+
+        text "[theweekday] [period]"
+
 
 
 ################################################################################
