@@ -1452,8 +1452,8 @@ screen text_input(message, variable):
                 xalign 0.5
                 action Return()# this screen is meant to be called
                 keysym('K_RETURN', 'K_KP_ENTER') # can also add keysym to activate it with a keyboard
-                activate_sound("audio/sfx_ui_button.mp3") # sound when clicked
-                hover_sound("audio/sfx_ui_button_select.mp3") #sound when hovered
+                activate_sound("audio/sfx_ui_button_select.mp3") # sound when clicked
+                hover_sound("audio/sfx_ui_button.mp3") #sound when hovered
 
 ## Calendar screen ##################################################################
 ##

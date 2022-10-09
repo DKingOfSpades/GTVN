@@ -79,9 +79,7 @@ init -100 python:
 
 # Game start
 label start:
-    # Initialize the default values of some of the variables used in
-    # the game.
-
+    $ current_location = ""
     call intro_faset
 
     scene bg tech tower:
