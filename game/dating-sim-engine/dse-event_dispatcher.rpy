@@ -228,13 +228,17 @@ init -100 python:
         store.events_executed_yesterday = { }
 
     config.start_callbacks.append(__events_init)
-        
+
 
 # This should called at the end of a (game) day, to let things
 # like depends_yesterday to work.
 label events_end_day:
 
     $ skip_periods = 0
+
+    if hungry:
+        "I feel like I haven't eaten enough today..."
+        $ fatigue+=1
 
     python hide:
 
@@ -245,9 +249,9 @@ label events_end_day:
             events_executed_yesterday[k] = True
 
     return
-    
+
 # This is called once per period, to determine, and then execute, the
-# events that should be run for that period. 
+# events that should be run for that period.
 label events_run_period:
 
     $ events = [ ]
@@ -261,7 +265,7 @@ label events_run_period:
         for i in all_events:
             if not i.check(eobjs):
                 continue
-                
+
             eobjs.append(i)
 
             props = i.properties()
@@ -280,12 +284,12 @@ label events_run_period:
 
         for k in egroups:
             echosen[k] = renpy.random.choice(egroups[k])
-            
+
         for i in eobjs:
 
             if i in eingroup and echosen[eingroup[i]] is not i:
                 continue
-            
+
             events.append(i.name)
 
 
@@ -313,7 +317,7 @@ label events_skip_period:
     $ skip_periods = 2
     return
 
-        
+
 init 100:
     python hide:
         # Sort all events on priority.
@@ -324,5 +328,3 @@ init 100:
         for i in all_events:
             if not renpy.has_label(i.name):
                 raise Exception("'%s' is defined as an event somewhere in the game, but no label named '%s' was defined anywhere." % (i.name, i.name))
-    
-

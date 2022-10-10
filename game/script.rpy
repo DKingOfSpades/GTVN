@@ -20,10 +20,10 @@ init -100 python:
     dp_choice("Cut Class", "cut")
 
     dp_choice("Attend Class", "class")
-    dp_choice("Eat", "eat")
-    dp_choice("Study", "study")
-    dp_choice("Exercise", "exercise")
-    dp_choice("Sleep In", "sleepin", show="fatigue > 0")
+    dp_choice("Eat", "eat", show="\"Dining\" in current_location")
+    dp_choice("Study", "study", show="\"Dorm\" in current_location or current_location == \"Crossland\" or current_location == \"CULC\" or current_location == \"Student Center\"")
+    dp_choice("Exercise", "exercise", show="\"Dorm\" in current_location or current_location == \"Tech Green\" or current_location == \"Burger Bowl\" or current_location == \"Campus Recreation Center\"")
+    dp_choice("Sleep In", "sleepin", show="fatigue > 0 and \"Dorm\" in current_location")
     dp_choice("Travel", "travel")
     dp_choice("Talk to ...", "talk")
     dp_choice("Text ...", "text")
@@ -38,9 +38,9 @@ init -100 python:
     dp_choice("Hang Out", "hang")
 
     dp_choice("Listen to Lecture", "class")
-    dp_choice("Eat", "eat")
-    dp_choice("Study", "study")
-    dp_choice("Exercise", "exercise")
+    dp_choice("Eat", "eat", show="\"Dining\" in current_location")
+    dp_choice("Study", "study", show="\"Dorm\" in current_location or current_location == \"Crossland\" or current_location == \"CULC\" or current_location == \"Student Center\"")
+    dp_choice("Exercise", "exercise", show="\"Dorm\" in current_location or current_location == \"Tech Green\" or current_location == \"Burger Bowl\" or current_location == \"Campus Recreation Center\"")
     dp_choice("Nap", "nap", show="fatigue > 0")
     dp_choice("Travel", "travel")
     dp_choice("Talk to ...", "talk")
@@ -53,9 +53,9 @@ init -100 python:
     dp_choice("Play Games", "play")
 
     dp_choice("Attend Lecture", "class")
-    dp_choice("Eat", "eat")
-    dp_choice("Study", "study")
-    dp_choice("Exercise", "exercise")
+    dp_choice("Eat", "eat", show="\"Dining\" in current_location")
+    dp_choice("Study", "study", show="\"Dorm\" in current_location or current_location == \"Crossland\" or current_location == \"CULC\" or current_location == \"Student Center\"")
+    dp_choice("Exercise", "exercise", show="\"Dorm\" in current_location or current_location == \"Tech Green\" or current_location == \"Burger Bowl\" or current_location == \"Campus Recreation Center\"")
     dp_choice("Nap", "nap", show="fatigue > 0")
     dp_choice("Travel", "travel")
     dp_choice("Talk to ...", "talk")
@@ -65,12 +65,11 @@ init -100 python:
 
     # Night
     dp_period("Night", "night_act")
-    dp_choice("Study", "study")
-    dp_choice("Sleep", "sleep")
 
-    dp_choice("Eat", "eat")
-    dp_choice("Study", "study")
-    dp_choice("Exercise", "exercise")
+    dp_choice("Sleep", "sleep", show="\"Dorm\" in current_location")
+    dp_choice("Eat", "eat", show="\"Dining\" in current_location")
+    dp_choice("Study", "study", show="\"Dorm\" in current_location or current_location == \"Crossland\" or current_location == \"CULC\" or current_location == \"Student Center\"")
+    dp_choice("Exercise", "exercise", show="\"Dorm\" in current_location or current_location == \"Tech Green\" or current_location == \"Burger Bowl\" or current_location == \"Campus Recreation Center\"")
     dp_choice("Travel", "travel")
     dp_choice("Talk to ...", "talk")
     dp_choice("Text ...", "text")
@@ -114,6 +113,7 @@ label day:
 
 # We process each of the three periods of the day, in turn.
     $ AP = 10 - fatigue
+    $ hungry = True
     call bgm_period_change_morning
 label morning:
 

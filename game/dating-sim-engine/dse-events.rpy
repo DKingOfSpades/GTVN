@@ -219,7 +219,7 @@ label discover:
 label sleep:
 
     if AP > 4:
-        "Might as well go to sleep early, to get some more energy for tomorrow."
+        "Might as well go to sleep early to get some more energy for tomorrow."
         $ fatigue -= 2
     else:
         "I guess I'll plop into my bed and get ready for a good night's sleep."
@@ -247,11 +247,11 @@ label sleepin:
 
 label eat:
 
-    "not yet implemented"
-
-    "You eat at the Nave dining hall. It was mediocre at best, like usual."
+    "You eat at the dining hall. It was mediocre at best, like usual."
 
     "You leave feeling satiated."
+
+    $ hungry = False
 
     $ AP -= 2
 
