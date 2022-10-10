@@ -160,11 +160,9 @@ label nap3:
 
 label travel:
 
-    "not yet implemented, but we'll be decreasing your time anyways because lets just assume you are traveling to another place"
+    "I should probably head somewhere else..."
 
-    "todo: add map and selectable locations, also make events dependent on current location"
-
-    "once you travel somewhere, it will tell you what characters are there at the moment as well"
+    call screen map_screen
 
     $ AP -= 1
 
