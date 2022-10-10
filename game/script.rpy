@@ -85,7 +85,9 @@ label start:
     scene bg tech tower:
         subpixel True blur 5.0
         xzoom 1.15 yzoom 1.15 zoom 1.5
-    play music "audio/bgm_waiting.mp3" fadein 1.0 volume 0.5
+    # play music "audio/bgm_waiting.mp3" fadein 1.0 volume 0.5
+    stop music
+    call bgm_campus_start
     $ AP = 10
 label day:
     $ show_date = False
@@ -112,6 +114,7 @@ label day:
 
 # We process each of the three periods of the day, in turn.
     $ AP = 10 - fatigue
+    call bgm_period_change_morning
 label morning:
 
     # Set these variables to appropriate values, so they can be
@@ -135,12 +138,14 @@ label morning:
     # That's it for the morning, so we fall through to the
     # afternoon.
     $ AP = 10 - fatigue
+    call bgm_period_change_noon
 label noon:
 
     # It's possible that we will be skipping noon, if one
     # of the events in the morning jumped to skip_next_period. If
     # so, we should skip the noon.
     if check_skip_period():
+        call bgm_period_change_evening
         jump evening
 
     # The rest of this is the same as for the morning.
@@ -156,10 +161,12 @@ label noon:
         jump noon
 
     $ AP = 10 - fatigue
+    call bgm_period_change_evening
 label evening:
 
     # The evening is the same as the noon.
     if check_skip_period():
+        call bgm_period_change_night
         $ fatigue+=1
         jump night
 
@@ -175,10 +182,11 @@ label evening:
 
     $ AP = 10 - fatigue
     $ fatigue+=1
+    call bgm_period_change_night
 label night:
 
     if check_skip_period():
-        $ AP = 2
+        $ AP = 3
 
     $ period = "Night"
     $ sleep_check = False
