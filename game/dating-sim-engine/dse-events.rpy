@@ -24,13 +24,8 @@ init:
 
     $ event("class", "act == 'class'", event.only(), priority=200)
     $ event("class_bad", "act == 'class'", priority=210)
-    $ event("cut1", "act == 'cut'", event.choose_one('cut'), priority=200)
-    $ event("cut2", "act == 'cut'", event.choose_one('cut'), priority=200)
-    $ event("fly", "act == 'fly'", event.solo(), priority=200)
     $ event("study", "act == 'study'", event.solo(), priority=200)
-    $ event("hang", "act == 'hang'", event.solo(), priority=200)
     $ event("exercise", "act == 'exercise'", event.solo(), priority=200)
-    $ event("play", "act == 'play'", event.solo(), priority=200)
 
 
     $ event("nap1", "act == 'nap'", event.choose_one('nap'), priority=200)
@@ -111,9 +106,6 @@ init:
             event.depends('pothole'), event.solo(), priority=170)
     $ event("sg_confess", "act == 'class'",
             event.depends('dontsee'), event.once())
-
-    # Relaxed ending with no girls happens if we max out our hidden relaxation stat.
-    $ event("relaxed_ending", "act=='hang' and perception >= 100", event.once())
 
     # Ending with both girls only happens if we have seen both of their final events
     # This needs to be higher-priority than either girl's ending.
@@ -280,33 +272,6 @@ label class_bad:
 
     return
 
-label cut1:
-
-    "I cut class, and spend the morning goofing off instead."
-
-    $ brain -= 10
-    $ perception += 10
-    $ AP -= 3
-
-    return
-
-label cut2:
-
-    "I cut class, and spend the morning playing computer games."
-
-    $ perception += 10
-    $ AP -= 3
-
-    return
-
-label fly:
-
-    "I dream that I am flying to the moon, where I meet up with two girls..."
-    "I wake up too late to go to class."
-    $ AP -= 3
-
-    return
-
 label study:
 
     "I head on down to the library, and start reading about the topics
@@ -338,18 +303,6 @@ label exercise:
     $ AP -= 3
 
     return
-
-label play:
-
-    "I pop a DVD into my video game console, and spend the evening
-     rolling small cities up into balls."
-
-    $ brawn -= 10
-    $ perception += 10
-    $ AP -= 3
-
-    return
-
 
 # Below here are special events that are triggered when certain
 # conditions are true.
@@ -975,15 +928,4 @@ label both_confess:
 
     ".:. Ending 3."
 
-    $ renpy.full_restart()
-
-label relaxed_ending:
-    "I had cut class and slacked off so much, that I was way behind."
-    "There was no way I was ever going to catch up."
-    "I kind of didn't care, though I had a sinking feeling I was missing out on something."
-    "But what could be better than hanging out and just doing whatever I wanted?"
-    "Nothing, right?"
-    "...right?"
-
-    ".:. Ending 4."
     $ renpy.full_restart()

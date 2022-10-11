@@ -17,8 +17,6 @@ init -100 python:
 
     # Morning
     dp_period("Morning", "morning_act")
-    dp_choice("Cut Class", "cut")
-
     dp_choice("Attend Class", "class")
     dp_choice("Eat", "eat", show="\"Dining\" in current_location")
     dp_choice("Study", "study", show="\"Dorm\" in current_location or current_location == \"Crossland\" or current_location == \"CULC\" or current_location == \"Student Center\"")
@@ -30,13 +28,8 @@ init -100 python:
     dp_choice("Call ...", "calling")
     dp_choice("Discover", "discover")
 
-    # This is an example of an event that should only show up under special circumstances
-    dp_choice("Fly to the Moon", "fly", show="brain >= 100 and brawn >= 100")
-
     # Noon
     dp_period("Noon", "noon_act")
-    dp_choice("Hang Out", "hang")
-
     dp_choice("Listen to Lecture", "class")
     dp_choice("Eat", "eat", show="\"Dining\" in current_location")
     dp_choice("Study", "study", show="\"Dorm\" in current_location or current_location == \"Crossland\" or current_location == \"CULC\" or current_location == \"Student Center\"")
@@ -50,8 +43,6 @@ init -100 python:
 
     # Evening
     dp_period("Evening", "evening_act")
-    dp_choice("Play Games", "play")
-
     dp_choice("Attend Lecture", "class")
     dp_choice("Eat", "eat", show="\"Dining\" in current_location")
     dp_choice("Study", "study", show="\"Dorm\" in current_location or current_location == \"Crossland\" or current_location == \"CULC\" or current_location == \"Student Center\"")
@@ -65,7 +56,6 @@ init -100 python:
 
     # Night
     dp_period("Night", "night_act")
-
     dp_choice("Sleep", "sleep", show="\"Dorm\" in current_location")
     dp_choice("Eat", "eat", show="\"Dining\" in current_location")
     dp_choice("Study", "study", show="\"Dorm\" in current_location or current_location == \"Crossland\" or current_location == \"CULC\" or current_location == \"Student Center\"")
