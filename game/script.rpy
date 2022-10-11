@@ -78,7 +78,7 @@ init -100 python:
 
 # Game start
 label start:
-    $ current_location = ""
+
     call intro_faset
 
     scene bg tech tower:
@@ -87,6 +87,9 @@ label start:
     # play music "audio/bgm_waiting.mp3" fadein 1.0 volume 0.5
     stop music
     call bgm_campus_start
+    $ current_location = "Dorms"
+    $ current_x = 1568
+    $ current_y = 490
     $ AP = 10
 label day:
     $ show_date = False

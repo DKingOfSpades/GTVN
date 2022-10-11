@@ -162,11 +162,10 @@ label travel:
 
     "I should probably head somewhere else..."
 
+    $ prev_x = current_x
+    $ prev_y = current_y
+
     call screen map_screen
-
-    $ AP -= 1
-
-    return
 
 label talk:
 

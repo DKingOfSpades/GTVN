@@ -1,4 +1,6 @@
 init -100 python:
+    import math
+
     class Location(object):
         def __init__(self, x, y, name, j, is_active):
             self.x = x
@@ -33,6 +35,15 @@ init -100 python:
     Locations.append(Location(1300, 54, "McCamish Pavilion", "mccamish_pavilion", False))
 
 label map_scene_change:
+    python:
+        import math
+        delta = int(math.ceil(math.sqrt((current_x-prev_x)**2 + (current_y-prev_y)**2)))
+    if delta > 1000:
+        $ AP-=2
+    elif delta == 0:
+        $ AP-=0
+    else:
+        $ AP-=1
     $ current_location_img = "bg " + current_location.lower()
     if renpy.has_image(current_location_img):
         scene expression current_location_img:

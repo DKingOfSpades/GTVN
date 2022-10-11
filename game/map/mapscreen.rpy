@@ -12,4 +12,4 @@ screen map_screen():
                     hover "map/" + l.j + "_hover.png"
                     activate_sound("audio/sfx_ui_button_select.mp3") # sound when clicked
                     hover_sound("audio/sfx_ui_button.mp3") #sound when hovered
-                    action [SetVariable("current_location", l.name), Jump(l.j)]
+                    action [SetVariable("current_location", l.name), SetVariable("current_x", l.x), SetVariable("current_y", l.y), Jump(l.j)]
