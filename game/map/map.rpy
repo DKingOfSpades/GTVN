@@ -33,6 +33,7 @@ init -100 python:
     Locations.append(Location(218, 84, "Burger Bowl", "burger_bowl", False))
     Locations.append(Location(1092, 203, "Russ Chandler Stadium", "russ_chandler_stadium", False))
     Locations.append(Location(1300, 54, "McCamish Pavilion", "mccamish_pavilion", False))
+    Locations.append(Location(300, -100, "Student Competition Center", "student_competition_center", False))
 
 label map_scene_change:
     python:
@@ -93,7 +94,7 @@ label tech_green:
 
 label culc:
     call map_scene_change
-    "culc dodd pressed"
+    "culc pressed"
     return
 
 label crossland:
@@ -154,4 +155,9 @@ label russ_chandler_stadium:
 label mccamish_pavilion:
     call map_scene_change
     "McCamish Pavilion pressed"
+    return
+
+label student_competition_center:
+    call map_scene_change
+    "scc traversed"
     return

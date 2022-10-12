@@ -41,9 +41,11 @@ init:
     $ event("eat", "act == 'eat'", event.solo(), priority=200)
 
 
-    # This is an introduction event, that runs once when we first go
-    # to class.
-    $ event("introduction", "act == 'class'", event.once(), event.only())
+    # This is an first winri event, that runs once when we first go to class.
+    $ event("robot_gal", "act == 'class'", event.once(), event.only())
+
+    # This is an first otekku event, that runs once when we first discover.
+    $ event("biscord_gremlin", "act == 'discover'", event.once(), event.only())
 
     # These are the events with glasses girl.
     #
@@ -57,7 +59,7 @@ init:
             event.solo(),
             # This takes place at least one day after seeing the
             # introduction event.
-            event.depends("introduction"),
+            event.depends("robot_gal"),
             # This takes priority over the study event.
             priority=190)
 
@@ -70,7 +72,7 @@ init:
             event.once(),
             # It requires the introduction event to have run at least
             # one day before.
-            event.depends("introduction"))
+            event.depends("robot_gal"))
 
     # After the pen, she smiles when she sees us.
     $ event("gg_smiling", "act == 'study'",
@@ -278,7 +280,6 @@ label study:
      I should have been reading about in class."
 
     $ brain += 10
-    $ perception -= 10
     $ AP -= 3
 
     return
@@ -299,7 +300,6 @@ label exercise:
      shape."
 
     $ brawn += 10
-    $ perception -= 10
     $ AP -= 3
 
     return
@@ -375,7 +375,6 @@ label gg_studying:
      book."
 
     $ brain += 10
-    $ perception -= 10
 
     $ AP -= 3
 
@@ -435,7 +434,6 @@ label gg_smiling:
      book."
 
     $ brain += 10
-    $ perception -= 10
     $ AP -= 3
 
     return
@@ -637,7 +635,6 @@ label cantcatchme:
      I'll catch up to her."
 
     $ brawn += 10
-    $ perception -= 10
 
     $ AP -= 3
 
@@ -684,7 +681,6 @@ label caughtme:
     "I nod a third time, and we take off, running side by side."
 
     $ brawn += 10
-    $ perception -= 10
     $ AP -= 3
 
     return
@@ -721,7 +717,6 @@ label apart:
      up with her."
 
     $ brawn += 10
-    $ perception -= 10
     $ AP -= 3
 
     return
