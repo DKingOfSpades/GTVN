@@ -17,11 +17,14 @@ init:
     $ Otekku = Character('O\'Tekku-chan', image="otekku", color="#FFD700")
     $ VGDev = Character('VGDev-san', image="vgdev", color="#64C617")
     $ Buzz = Character('Buzz', image="buzz", color="#FFD700")
+    $ unknown = Character('?', color="#867900")
+    $ Professor = Character("Professor", color="#444444")
 
 init:
     # First up, we define some simple events for the various actions, that
     # are run only if no higher-priority event is about to occur.
 
+    $ event("buzz-first-meeting", "act == 'class'", event.once(), priority=40)
     $ event("class", "act == 'class'", event.only(), priority=200)
     $ event("class_bad", "act == 'class'", priority=210)
     $ event("cut1", "act == 'cut'", event.choose_one('cut'), priority=200)
@@ -29,6 +32,7 @@ init:
     $ event("fly", "act == 'fly'", event.solo(), priority=200)
     $ event("study", "act == 'study'", event.solo(), priority=200)
     $ event("hang", "act == 'hang'", event.solo(), priority=200)
+    $ event("buzz-gym-1", "act == 'exercise'", "period == evening", event.once(), priority=100)
     $ event("exercise", "act == 'exercise'", event.solo(), priority=200)
     $ event("play", "act == 'play'", event.solo(), priority=200)
 
