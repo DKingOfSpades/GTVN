@@ -46,11 +46,13 @@ label player_name_selection:
             jump player_name_b
 
 label player_name_a:
+    $ mc = Character('George', color=(0, 0, 0, 255))
     jump player_name_selection_common
 
 label player_name_b:
     $ player_name = "Georgia P. Burdell"
     $ first_name = "Georgia"
+    $ mc = Character('Georgia', color=(0, 0, 0, 255))
     jump player_name_selection_common
 
 label player_name_selection_common:

@@ -17,6 +17,7 @@ init:
     $ Otekku = Character('O\'Tekku-chan', image="otekku", color="#FFD700")
     $ VGDev = Character('VGDev-san', image="vgdev", color="#64C617")
     $ Buzz = Character('Buzz', image="buzz", color="#FFD700")
+    $ Winri = Character('Winri', image="winri", color="#B87333")
 
 init:
     # First up, we define some simple events for the various actions, that
@@ -43,6 +44,7 @@ init:
 
     # This is an first winri event, that runs once when we first go to class.
     $ event("robot_gal", "act == 'class'", event.once(), event.only())
+    $ event("lend_a_hand", "act == 'talk' and current_location == 'Student Competition Center'", event.once(), event.depends("robot_gal"), event.only())
 
     # This is an first otekku event, that runs once when we first discover.
     $ event("biscord_gremlin", "act == 'discover'", event.once(), event.only())

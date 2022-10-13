@@ -13,15 +13,15 @@ label biscord_gremlin:
     hachiko_nvl "i also watch and read all sorts of stuff, can't really chose a specific genre to be a fav tho"
     hachiko_nvl "what kind of shows are ur favorite {b}@xX_burdelli_Xx{/b}?"
     menu(nvl=True):
-        "I mainly watch some shounen shows here and there. Nothing too much":
-            mc_nvl "I mainly watch some shounen shows here and there. Nothing too much"
+        "I watch some shounen shows here and there. Nothing much":
+            mc_nvl "I watch some shounen shows here and there. Nothing much"
             hachiko_nvl "ooo i watch a lot of sports anime! my favs include haiku and spicy ice"
             hachiko_nvl "but never too late for u to watch more stuff!"
             mel_nvl "everyone's gotta start from somewhere"
             mel_nvl "even finn, one of our officers, barely watches anything"
             finn_nvl "Yeah i stay uptodate with a couple of light novels, but nothing else really besides that"
-        "I'm a die hard Mecha fan! Both classic and modern, super and real mecha!":
-            mc_nvl "I'm a die hard Mecha fan! Both classic and modern mecha!"
+        "I'm a die hard Mecha fan! Both classic & modern, super & real!":
+            mc_nvl "I'm a die hard Mecha fan! Both classic & modern, super & real!"
             hachiko_nvl "im not that huge mecha fan myself, but my favorite so far has probably got to be Eva"
             hachiko_nvl "maybe I should try to get into it more"
             nine_nvl "Been looking around for another for ages! My favorite mecha franchises are Macross and the game franchise mech warrior"
@@ -51,6 +51,7 @@ label biscord_gremlin:
     mc_nvl "me too"
     "Afterwards, Hachiko and I talked for a whopping 2 more hours about anime"
     "Both of us suck at ending a conversation..."
+    "I should go to the meeting this weekend."
 
-    AP -= 4
+    $ AP -= 4
     return
