@@ -49,17 +49,11 @@ label faset_random_schedule:
     $ first_engl_class = Course("ENGL 1101 English Composition", eng[0], eng[1], "Skiles", eng_qlist, [24])
     $ schedule.append(first_engl_class)
 
-    $ math = day_period.pop()
+    $ m = day_period.pop()
     $ math_qlist = []
     $ math_qlist.append(Question("Is the line extending from A connecting to B or C", ["B", "C"], 1, worth = 1.0))
-    $ first_math_class = Course("MATH 1554 Linear Alebra", math[0], math[1], "Howey", math_qlist, [13])
+    $ first_math_class = Course("MATH 1554 Linear Alebra", m[0], m[1], "Howey", math_qlist, [13])
     $ schedule.append(first_math_class)
-
-    $ hist = day_period.pop()
-    $ hist_qlist = []
-    $ hist_qlist.append(Question("What event did Emperor Nero add to the Olympics so he could participate?", ["Singing", "Dancing", "Javelin", "Chariot Racing"], 0, worth = 1.0))
-    $ first_hist_class = Course("HIST 2111 US History to 1877", hist[0], hist[1], "East Architecture", hist_qlist, [14])
-    $ schedule.append(first_hist_class)
 
     $ phys = day_period.pop()
     $ phys_qlist = []
@@ -70,7 +64,7 @@ label faset_random_schedule:
     $ chem = day_period.pop()
     $ chem_qlist = []
     $ chem_qlist.append(Question("What is the atomic number of oxygen?", ["1", "2", "8", "69"], 2, worth = 1.0))
-    $ first_chem_class = Course("CHEM 1310 General Chemistry", chem[0], chem[1], "Ford EST", chem_qlist, [20])
+    $ first_chem_class = Course("CHEM 1310 General Chemistry", chem[0], chem[1], "Boggs", chem_qlist, [20])
     $ schedule.append(first_chem_class)
 
     return

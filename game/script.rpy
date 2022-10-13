@@ -11,36 +11,29 @@ init -100 python:
     register_stat("Guts", "guts")
     register_stat("Honey", "honey")
     register_stat("Fatigue", "fatigue", 0, 6)
-    register_stat("Perception", "perception", hidden=True)
+    # register_stat("Perception", "perception", hidden=True) # hidden stat example
     # all events in dse-events.rpy depend on this variable
     AP = 0
 
     # Morning
     dp_period("Morning", "morning_act")
-    dp_choice("Cut Class", "cut")
-
-    dp_choice("Attend Class", "class")
-    dp_choice("Eat", "eat")
-    dp_choice("Study", "study")
-    dp_choice("Exercise", "exercise")
-    dp_choice("Sleep In", "sleepin", show="fatigue > 0")
+    dp_choice("Attend Class", "class", show="current_location == \"Boggs\" or current_location == \"Skiles\" or current_location == \"Howey\" or current_location == \"CULC\"")
+    dp_choice("Eat", "eat", show="\"Dining\" in current_location")
+    dp_choice("Study", "study", show="\"Dorm\" in current_location or current_location == \"Crossland\" or current_location == \"CULC\" or current_location == \"Student Center\"")
+    dp_choice("Exercise", "exercise", show="\"Dorm\" in current_location or current_location == \"Tech Green\" or current_location == \"Burger Bowl\" or current_location == \"Campus Recreation Center\"")
+    dp_choice("Sleep In", "sleepin", show="fatigue > 0 and \"Dorm\" in current_location")
     dp_choice("Travel", "travel")
     dp_choice("Talk to ...", "talk")
     dp_choice("Text ...", "text")
     dp_choice("Call ...", "calling")
     dp_choice("Discover", "discover")
 
-    # This is an example of an event that should only show up under special circumstances
-    dp_choice("Fly to the Moon", "fly", show="brain >= 100 and brawn >= 100")
-
     # Noon
     dp_period("Noon", "noon_act")
-    dp_choice("Hang Out", "hang")
-
-    dp_choice("Listen to Lecture", "class")
-    dp_choice("Eat", "eat")
-    dp_choice("Study", "study")
-    dp_choice("Exercise", "exercise")
+    dp_choice("Listen to Lecture", "class", show="current_location == \"Boggs\" or current_location == \"Skiles\" or current_location == \"Howey\" or current_location == \"CULC\"")
+    dp_choice("Eat", "eat", show="\"Dining\" in current_location")
+    dp_choice("Study", "study", show="\"Dorm\" in current_location or current_location == \"Crossland\" or current_location == \"CULC\" or current_location == \"Student Center\"")
+    dp_choice("Exercise", "exercise", show="\"Dorm\" in current_location or current_location == \"Tech Green\" or current_location == \"Burger Bowl\" or current_location == \"Campus Recreation Center\"")
     dp_choice("Nap", "nap", show="fatigue > 0")
     dp_choice("Travel", "travel")
     dp_choice("Talk to ...", "talk")
@@ -50,12 +43,10 @@ init -100 python:
 
     # Evening
     dp_period("Evening", "evening_act")
-    dp_choice("Play Games", "play")
-
-    dp_choice("Attend Lecture", "class")
-    dp_choice("Eat", "eat")
-    dp_choice("Study", "study")
-    dp_choice("Exercise", "exercise")
+    dp_choice("Attend Lecture", "class", show="current_location == \"Boggs\" or current_location == \"Skiles\" or current_location == \"Howey\" or current_location == \"CULC\"")
+    dp_choice("Eat", "eat", show="\"Dining\" in current_location")
+    dp_choice("Study", "study", show="\"Dorm\" in current_location or current_location == \"Crossland\" or current_location == \"CULC\" or current_location == \"Student Center\"")
+    dp_choice("Exercise", "exercise", show="\"Dorm\" in current_location or current_location == \"Tech Green\" or current_location == \"Burger Bowl\" or current_location == \"Campus Recreation Center\"")
     dp_choice("Nap", "nap", show="fatigue > 0")
     dp_choice("Travel", "travel")
     dp_choice("Talk to ...", "talk")
@@ -65,12 +56,10 @@ init -100 python:
 
     # Night
     dp_period("Night", "night_act")
-    dp_choice("Study", "study")
-    dp_choice("Sleep", "sleep")
-
-    dp_choice("Eat", "eat")
-    dp_choice("Study", "study")
-    dp_choice("Exercise", "exercise")
+    dp_choice("Sleep", "sleep", show="\"Dorm\" in current_location")
+    dp_choice("Eat", "eat", show="\"Dining\" in current_location")
+    dp_choice("Study", "study", show="\"Dorm\" in current_location or current_location == \"Crossland\" or current_location == \"CULC\" or current_location == \"Student Center\"")
+    dp_choice("Exercise", "exercise", show="\"Dorm\" in current_location or current_location == \"Tech Green\" or current_location == \"Burger Bowl\" or current_location == \"Campus Recreation Center\"")
     dp_choice("Travel", "travel")
     dp_choice("Talk to ...", "talk")
     dp_choice("Text ...", "text")
@@ -79,13 +68,18 @@ init -100 python:
 
 # Game start
 label start:
-    $ current_location = ""
+
     call intro_faset
 
-    scene bg tech tower:
-        subpixel True blur 5.0
-        xzoom 1.15 yzoom 1.15 zoom 1.5
-    play music "audio/bgm_waiting.mp3" fadein 1.0 volume 0.5
+    scene bg dorm:
+        xsize 1920
+        ysize 1080
+    # play music "audio/bgm_waiting.mp3" fadein 1.0 volume 0.5
+    stop music
+    call bgm_campus_start
+    $ current_location = "Dorms"
+    $ current_x = 1568
+    $ current_y = 490
     $ AP = 10
 label day:
     $ show_date = False
@@ -112,6 +106,8 @@ label day:
 
 # We process each of the three periods of the day, in turn.
     $ AP = 10 - fatigue
+    $ hungry = True
+    call bgm_period_change_morning
 label morning:
 
     # Set these variables to appropriate values, so they can be
@@ -126,8 +122,6 @@ label morning:
 
     call events_run_period
 
-    "AP: [AP]"
-
     if AP > 0:
         $ sleep_in_check = True
         jump morning
@@ -135,12 +129,14 @@ label morning:
     # That's it for the morning, so we fall through to the
     # afternoon.
     $ AP = 10 - fatigue
+    call bgm_period_change_noon
 label noon:
 
     # It's possible that we will be skipping noon, if one
     # of the events in the morning jumped to skip_next_period. If
     # so, we should skip the noon.
     if check_skip_period():
+        call bgm_period_change_evening
         jump evening
 
     # The rest of this is the same as for the morning.
@@ -156,10 +152,12 @@ label noon:
         jump noon
 
     $ AP = 10 - fatigue
+    call bgm_period_change_evening
 label evening:
 
     # The evening is the same as the noon.
     if check_skip_period():
+        call bgm_period_change_night
         $ fatigue+=1
         jump night
 
@@ -175,10 +173,11 @@ label evening:
 
     $ AP = 10 - fatigue
     $ fatigue+=1
+    call bgm_period_change_night
 label night:
 
     if check_skip_period():
-        $ AP = 2
+        $ AP = 3
 
     $ period = "Night"
     $ sleep_check = False

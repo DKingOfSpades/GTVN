@@ -1,4 +1,6 @@
 init -100 python:
+    import math
+
     class Location(object):
         def __init__(self, x, y, name, j, is_active):
             self.x = x
@@ -12,27 +14,37 @@ init -100 python:
 
     Locations.append(Location(1130, 660, "Tech Tower", "tech_tower", True))
     Locations.append(Location(1678, 958, "North Ave Dining", "north_ave_dining", True))
-    Locations.append(Location(1299, 549, "Bobby Dodd Stadium", "bobby_dodd_stadium", True))
+    Locations.append(Location(1299, 549, "Bobby Dodd Stadium", "bobby_dodd_stadium", False))
     Locations.append(Location(1568, 490, "Dorms", "dorms", True))
-    Locations.append(Location(1631, 707, "Brittain Dining", "brittain_dining", True))
-    Locations.append(Location(1141, 213, "Greek Life", "greek_life", True))
-    Locations.append(Location(961, 199, "Klaus", "klaus", True))
+    Locations.append(Location(1631, 707, "Brittain Dining", "brittain_dining", False))
+    Locations.append(Location(1141, 213, "Greek Life", "greek_life", False))
+    Locations.append(Location(961, 199, "Klaus", "klaus", False))
     Locations.append(Location(740, 408, "Tech Green", "tech_green", True))
     Locations.append(Location(872, 392, "CULC", "culc", True))
     Locations.append(Location(1076, 433, "Crossland", "crossland", True))
     Locations.append(Location(862, 518, "Skiles", "skiles", True))
-    Locations.append(Location(516, 431, "Student Center", "student_center", True))
+    Locations.append(Location(516, 431, "Student Center", "student_center", False))
     Locations.append(Location(-4, 201, "Campus Recreation Center", "campus_recreation_center", True))
-    Locations.append(Location(-4, 54, "Dorms 2", "dorms_2", True))
-    Locations.append(Location(184, 69, "Willage Dining", "willage_dining", True))
-    Locations.append(Location(524, 353, "Ferst Center of the Arts", "ferst_center_of_the_arts", True))
+    Locations.append(Location(-4, 54, "Dorms 2", "dorms_2", False))
+    Locations.append(Location(184, 69, "Willage Dining", "willage_dining", False))
+    Locations.append(Location(524, 353, "Ferst Center of the Arts", "ferst_center_of_the_arts", False))
     Locations.append(Location(702, 184, "Howey", "howey", True))
     Locations.append(Location(500, 288, "Boggs", "boggs", True))
-    Locations.append(Location(218, 84, "Burger Bowl", "burger_bowl", True))
-    Locations.append(Location(1092, 203, "Russ Chandler Stadium", "russ_chandler_stadium", True))
-    Locations.append(Location(1300, 54, "McCamish Pavilion", "mccamish_pavilion", True))
+    Locations.append(Location(218, 84, "Burger Bowl", "burger_bowl", False))
+    Locations.append(Location(1092, 203, "Russ Chandler Stadium", "russ_chandler_stadium", False))
+    Locations.append(Location(1300, 54, "McCamish Pavilion", "mccamish_pavilion", False))
+    Locations.append(Location(300, -100, "Student Competition Center", "student_competition_center", False))
 
 label map_scene_change:
+    python:
+        import math
+        delta = int(math.ceil(math.sqrt((current_x-prev_x)**2 + (current_y-prev_y)**2)))
+    if delta > 1000:
+        $ AP-=2
+    elif delta == 0:
+        $ AP-=0
+    else:
+        $ AP-=1
     $ current_location_img = "bg " + current_location.lower()
     if renpy.has_image(current_location_img):
         scene expression current_location_img:
@@ -82,7 +94,7 @@ label tech_green:
 
 label culc:
     call map_scene_change
-    "culc dodd pressed"
+    "culc pressed"
     return
 
 label crossland:
@@ -143,4 +155,9 @@ label russ_chandler_stadium:
 label mccamish_pavilion:
     call map_scene_change
     "McCamish Pavilion pressed"
+    return
+
+label student_competition_center:
+    call map_scene_change
+    "scc traversed"
     return

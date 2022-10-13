@@ -19,6 +19,7 @@ init:
     $ Buzz = Character('Buzz', image="buzz", color="#FFD700")
     $ unknown = Character('?', color="#867900")
     $ Professor = Character("Professor", color="#444444")
+    $ Winri = Character('Winri', image="winri", color="#B87333")
 
 init:
     # First up, we define some simple events for the various actions, that
@@ -27,14 +28,10 @@ init:
     $ event("buzz-first-meeting", "act == 'class'", event.once(), priority=40)
     $ event("class", "act == 'class'", event.only(), priority=200)
     $ event("class_bad", "act == 'class'", priority=210)
-    $ event("cut1", "act == 'cut'", event.choose_one('cut'), priority=200)
-    $ event("cut2", "act == 'cut'", event.choose_one('cut'), priority=200)
-    $ event("fly", "act == 'fly'", event.solo(), priority=200)
     $ event("study", "act == 'study'", event.solo(), priority=200)
     $ event("hang", "act == 'hang'", event.solo(), priority=200)
     $ event("buzz-gym-1", "act == 'exercise'", "period == evening", event.once(), priority=100)
     $ event("exercise", "act == 'exercise'", event.solo(), priority=200)
-    $ event("play", "act == 'play'", event.solo(), priority=200)
 
 
     $ event("nap1", "act == 'nap'", event.choose_one('nap'), priority=200)
@@ -50,9 +47,12 @@ init:
     $ event("eat", "act == 'eat'", event.solo(), priority=200)
 
 
-    # This is an introduction event, that runs once when we first go
-    # to class.
-    $ event("introduction", "act == 'class'", event.once(), event.only())
+    # This is an first winri event, that runs once when we first go to class.
+    $ event("robot_gal", "act == 'class'", event.once(), event.only())
+    $ event("lend_a_hand", "act == 'talk' and current_location == 'Student Competition Center'", event.once(), event.depends("robot_gal"), event.only())
+
+    # This is an first otekku event, that runs once when we first discover.
+    $ event("biscord_gremlin", "act == 'discover'", event.once(), event.only())
 
     # These are the events with glasses girl.
     #
@@ -66,7 +66,7 @@ init:
             event.solo(),
             # This takes place at least one day after seeing the
             # introduction event.
-            event.depends("introduction"),
+            event.depends("robot_gal"),
             # This takes priority over the study event.
             priority=190)
 
@@ -79,7 +79,7 @@ init:
             event.once(),
             # It requires the introduction event to have run at least
             # one day before.
-            event.depends("introduction"))
+            event.depends("robot_gal"))
 
     # After the pen, she smiles when she sees us.
     $ event("gg_smiling", "act == 'study'",
@@ -116,9 +116,6 @@ init:
     $ event("sg_confess", "act == 'class'",
             event.depends('dontsee'), event.once())
 
-    # Relaxed ending with no girls happens if we max out our hidden relaxation stat.
-    $ event("relaxed_ending", "act=='hang' and perception >= 100", event.once())
-
     # Ending with both girls only happens if we have seen both of their final events
     # This needs to be higher-priority than either girl's ending.
     $ event('both_confess', 'act == "class"',
@@ -132,7 +129,7 @@ label nap1:
     "A little nap can't hurt, can it?"
     $ fatigue -= 2
 
-    "This time, I got so much energy back!"
+    "This time, I got so much energy back! {w}{b}-2 Fatigue{/b}"
 
     $ AP -= renpy.random.randint(3, 7)
 
@@ -143,7 +140,7 @@ label nap2:
     "A little nap can't hurt, can it?"
     $ fatigue -= 1
 
-    "I feel a little better rested at least."
+    "I feel a little better rested at least. {w}{b}-1 Fatigue{/b}"
 
     $ AP -= renpy.random.randint(1, 5)
 
@@ -157,22 +154,19 @@ label nap3:
     # This will end the current period and skip the next one.
     jump events_skip_period
 
-    "Oh god, what is the time?!?! Did I oversleep?"
+    "Oh god, what is the time?!?! Did I oversleep?{p}{b}-2 Fatigue{/b}"
     $ AP = 10 - fatigue
 
     return
 
 label travel:
 
-    "not yet implemented, but we'll be decreasing your time anyways because lets just assume you are traveling to another place"
+    "I should probably head somewhere else..."
 
-    "todo: add map and selectable locations, also make events dependent on current location"
+    $ prev_x = current_x
+    $ prev_y = current_y
 
-    "once you travel somewhere, it will tell you what characters are there at the moment as well"
-
-    $ AP -= 1
-
-    return
+    call screen map_screen
 
 label talk:
 
@@ -223,10 +217,10 @@ label discover:
 label sleep:
 
     if AP > 4:
-        "Might as well go to sleep early, to get some more energy for tomorrow."
+        "Might as well go to sleep early to get some more energy for tomorrow. {w}{b}-2 Fatigue{/b}"
         $ fatigue -= 2
     else:
-        "I guess I'll plop into my bed and get ready for a good night's sleep."
+        "I guess I'll plop into my bed and get ready for a good night's sleep. {w}{b}-1 Fatigue{/b}"
         $ fatigue -= 1
 
     # We call events_end_day to let it know that the day is done.
@@ -239,7 +233,7 @@ label sleep:
 label sleepin:
 
 
-    "I don't really feel like doing much this morning, so let's just sleep in."
+    "I don't really feel like doing much this morning, so let's just sleep in. {w}{b}-1 Fatigue{/b}"
     $ fatigue -= 1
 
     # This will end the current period.
@@ -251,11 +245,11 @@ label sleepin:
 
 label eat:
 
-    "not yet implemented"
-
-    "You eat at the Nave dining hall. It was mediocre at best, like usual."
+    "You eat at the dining hall. It was mediocre at best, like usual."
 
     "You leave feeling satiated."
+
+    $ hungry = False
 
     $ AP -= 2
 
@@ -264,10 +258,7 @@ label eat:
 # DSE events
 label class:
 
-    "I make it to class just in time, and proceed to listen to the
-     teacher droning on about a wide range of topics, none of which
-     are remotely interesting."
-
+    "I make it to class just in time, and proceed to listen to the teacher droning on about a wide range of topics, none of which are remotely interesting. {w}{b}+10 BRAIN{/b}"
     $ brain += 10
     $ AP -= 3
 
@@ -287,48 +278,18 @@ label class_bad:
 
     return
 
-label cut1:
-
-    "I cut class, and spend the morning goofing off instead."
-
-    $ brain -= 10
-    $ perception += 10
-    $ AP -= 3
-
-    return
-
-label cut2:
-
-    "I cut class, and spend the morning playing computer games."
-
-    $ perception += 10
-    $ AP -= 3
-
-    return
-
-label fly:
-
-    "I dream that I am flying to the moon, where I meet up with two girls..."
-    "I wake up too late to go to class."
-    $ AP -= 3
-
-    return
-
 label study:
 
-    "I head on down to the library, and start reading about the topics
-     I should have been reading about in class."
+    "I open up my textbooks, and start reading about the topics I should have been reading about in class. {w}{b}+10 BRAIN{/b}"
 
     $ brain += 10
-    $ perception -= 10
     $ AP -= 3
 
     return
 
 label hang:
 
-    "I spend the afternoon hanging out with my friends, killing
-     some time."
+    "I spend the afternoon hanging out with my friends, killing some time. {w}{b}+10 CHARM{/b}"
 
     $ charm += 10
     $ AP -= 3
@@ -337,26 +298,12 @@ label hang:
 
 label exercise:
 
-    "I decide to go out for a run through the town, to keep myself in
-     shape."
+    "I decide to go out for a run to keep myself in shape. {w}{b}+10 BRAWN{/b}"
 
     $ brawn += 10
-    $ perception -= 10
     $ AP -= 3
 
     return
-
-label play:
-
-    "I pop a DVD into my video game console, and spend the evening
-     rolling small cities up into balls."
-
-    $ brawn -= 10
-    $ perception += 10
-    $ AP -= 3
-
-    return
-
 
 # Below here are special events that are triggered when certain
 # conditions are true.
@@ -429,7 +376,6 @@ label gg_studying:
      book."
 
     $ brain += 10
-    $ perception -= 10
 
     $ AP -= 3
 
@@ -489,7 +435,6 @@ label gg_smiling:
      book."
 
     $ brain += 10
-    $ perception -= 10
     $ AP -= 3
 
     return
@@ -691,7 +636,6 @@ label cantcatchme:
      I'll catch up to her."
 
     $ brawn += 10
-    $ perception -= 10
 
     $ AP -= 3
 
@@ -738,7 +682,6 @@ label caughtme:
     "I nod a third time, and we take off, running side by side."
 
     $ brawn += 10
-    $ perception -= 10
     $ AP -= 3
 
     return
@@ -775,7 +718,6 @@ label apart:
      up with her."
 
     $ brawn += 10
-    $ perception -= 10
     $ AP -= 3
 
     return
@@ -982,15 +924,4 @@ label both_confess:
 
     ".:. Ending 3."
 
-    $ renpy.full_restart()
-
-label relaxed_ending:
-    "I had cut class and slacked off so much, that I was way behind."
-    "There was no way I was ever going to catch up."
-    "I kind of didn't care, though I had a sinking feeling I was missing out on something."
-    "But what could be better than hanging out and just doing whatever I wanted?"
-    "Nothing, right?"
-    "...right?"
-
-    ".:. Ending 4."
     $ renpy.full_restart()
