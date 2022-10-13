@@ -237,8 +237,8 @@ label events_end_day:
     $ skip_periods = 0
 
     if hungry:
-        "I feel like I haven't eaten enough today..."
-        $ fatigue+=1
+        "I feel like I haven't eaten enough today...{w}{b}+2 Fatigue{/b}"
+        $ fatigue+=2
 
     python hide:
 

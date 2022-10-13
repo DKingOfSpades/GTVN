@@ -124,7 +124,7 @@ label nap1:
     "A little nap can't hurt, can it?"
     $ fatigue -= 2
 
-    "This time, I got so much energy back!"
+    "This time, I got so much energy back! {w}{b}-2 Fatigue{/b}"
 
     $ AP -= renpy.random.randint(3, 7)
 
@@ -135,7 +135,7 @@ label nap2:
     "A little nap can't hurt, can it?"
     $ fatigue -= 1
 
-    "I feel a little better rested at least."
+    "I feel a little better rested at least. {w}{b}-1 Fatigue{/b}"
 
     $ AP -= renpy.random.randint(1, 5)
 
@@ -149,7 +149,7 @@ label nap3:
     # This will end the current period and skip the next one.
     jump events_skip_period
 
-    "Oh god, what is the time?!?! Did I oversleep?"
+    "Oh god, what is the time?!?! Did I oversleep?{p}{b}-2 Fatigue{/b}"
     $ AP = 10 - fatigue
 
     return
@@ -212,10 +212,10 @@ label discover:
 label sleep:
 
     if AP > 4:
-        "Might as well go to sleep early to get some more energy for tomorrow."
+        "Might as well go to sleep early to get some more energy for tomorrow. {w}{b}-2 Fatigue{/b}"
         $ fatigue -= 2
     else:
-        "I guess I'll plop into my bed and get ready for a good night's sleep."
+        "I guess I'll plop into my bed and get ready for a good night's sleep. {w}{b}-1 Fatigue{/b}"
         $ fatigue -= 1
 
     # We call events_end_day to let it know that the day is done.
@@ -228,7 +228,7 @@ label sleep:
 label sleepin:
 
 
-    "I don't really feel like doing much this morning, so let's just sleep in."
+    "I don't really feel like doing much this morning, so let's just sleep in. {w}{b}-1 Fatigue{/b}"
     $ fatigue -= 1
 
     # This will end the current period.
@@ -253,10 +253,7 @@ label eat:
 # DSE events
 label class:
 
-    "I make it to class just in time, and proceed to listen to the
-     teacher droning on about a wide range of topics, none of which
-     are remotely interesting."
-
+    "I make it to class just in time, and proceed to listen to the teacher droning on about a wide range of topics, none of which are remotely interesting. {w}{b}+10 BRAIN{/b}"
     $ brain += 10
     $ AP -= 3
 
@@ -278,8 +275,7 @@ label class_bad:
 
 label study:
 
-    "I head on down to the library, and start reading about the topics
-     I should have been reading about in class."
+    "I open up my textbooks, and start reading about the topics I should have been reading about in class. {w}{b}+10 BRAIN{/b}"
 
     $ brain += 10
     $ AP -= 3
@@ -288,8 +284,7 @@ label study:
 
 label hang:
 
-    "I spend the afternoon hanging out with my friends, killing
-     some time."
+    "I spend the afternoon hanging out with my friends, killing some time. {w}{b}+10 CHARM{/b}"
 
     $ charm += 10
     $ AP -= 3
@@ -298,8 +293,7 @@ label hang:
 
 label exercise:
 
-    "I decide to go out for a run through the town, to keep myself in
-     shape."
+    "I decide to go out for a run to keep myself in shape. {w}{b}+10 BRAWN{/b}"
 
     $ brawn += 10
     $ AP -= 3
