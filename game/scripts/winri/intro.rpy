@@ -27,6 +27,8 @@ label robot_gal:
 
     "Winri in the SCC…{p} I should go look after my classes sometime this week"
 
+    "{b}You unlocked the Student Competition Center on the map!{/b}"
+
     $ Locations[21].is_active = True
 
     return

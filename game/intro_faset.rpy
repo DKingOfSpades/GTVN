@@ -79,7 +79,7 @@ label player_major_selection:
     "Oscar" "This is your new list of registered classes:"
     call faset_random_schedule
     python:
-        to_say = "{{size=-5}}".format()
+        to_say = "{{size=-1}}".format()
         i = 0
         for c in schedule:
             to_say+= "{} during {} {}{{p}}".format(c.name, c.day_format, c.period)

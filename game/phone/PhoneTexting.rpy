@@ -2,7 +2,7 @@
 # All phone images are in the "phone" folder (use phone/some_image.png)
 
 define nvl_mode = "phone"  ##Allow the NVL mode to become a phone conversation
-define MC_Name = "George" ##The name of the main character, used to place them on the screen
+define mc = "xX_burdelli_Xx" ##The name of the main character, used to place them on the screen
 
 #Other Characters
 define hachiko = "Otakudos"
@@ -128,20 +128,20 @@ screen nvl_phonetext(dialogue):
                     if d.current:
                         at message_narrator
         else:
-            if d.who == MC_Name:
+            if d.who == mc:
                 $ message_frame = "phone/phone_send_frame.png"
             else:
                 $ message_frame = "phone/phone_received_frame.png"
 
             hbox:
                 spacing 10
-                if d.who == MC_Name:
+                if d.who == mc:
                     box_reverse True
 
                 #If this is the first message of the character, show an icon
                 if previous_d_who != d.who:
-                    if d.who == MC_Name:
-                        $ message_icon = "phone/phone_george_icon.png"
+                    if d.who == mc:
+                        $ message_icon = "phone/phone_xX_burdelli_Xx_icon.png"
                     elif d.who == hachiko:
                         $ message_icon = "phone/phone_Otakudos_icon.png"
                     elif d.who == devon:
@@ -158,6 +158,8 @@ screen nvl_phonetext(dialogue):
                         $ message_icon = "phone/phone_received_icon.png"
 
                     add message_icon:
+                        xsize 112
+                        ysize 112
                         if d.current:
                             at message_appear_icon()
 
@@ -166,7 +168,7 @@ screen nvl_phonetext(dialogue):
 
                 vbox:
                     yalign 1.0
-                    if d.who != MC_Name and previous_d_who != d.who:
+                    if d.who != mc and previous_d_who != d.who:
                         text d.who
 
                     frame:
@@ -177,7 +179,7 @@ screen nvl_phonetext(dialogue):
                         xsize 350
 
                         if d.current:
-                            if d.who == MC_Name:
+                            if d.who == mc:
                                 at message_appear(1)
                             else:
                                 at message_appear(-1)
@@ -188,7 +190,7 @@ screen nvl_phonetext(dialogue):
                             slow_cps False
 
 
-                            if d.who == MC_Name :
+                            if d.who == mc :
                                 color "#FFF"
                                 text_align 1.0
                                 xpos -580
