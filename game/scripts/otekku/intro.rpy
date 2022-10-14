@@ -52,6 +52,9 @@ label biscord_gremlin:
     "Afterwards, Hachiko and I talked for a whopping 2 more hours about anime"
     "Both of us suck at ending a conversation..."
     "I should go to the meeting this weekend."
+    "{b}You unlocked Klaus Computing on the map!{/b}"
+
+    $ Locations[6].is_active = True
 
     $ AP -= 4
     return

@@ -6,7 +6,7 @@ label club_fair_collision:
 
     "It's hard to figure out where anything is."
 
-    "*bump*"
+    "!!" with hpunch
 
     "Shoot. Did I bump into someone?"
 
@@ -44,7 +44,7 @@ label club_fair_collision:
             mc "Can I have a flyer?"
             VGDev "Sure!"
             "He hands you a flyer."
-            "VGDev: We make games.{p}Check us out at Howey L3 this Saturday!"
+            "VGDev: We make games.{p}Check us out at Howey L3 this Friday Evening!"
             VGDev "Well, I'll be seeing you!"
             VGDev "Feel free to check out our table for any questions or to meet Little Guy!"
         "It's fine, see you around.":

@@ -64,8 +64,8 @@ init:
 
     # vgdev events
     # $ event ("club_fair_day", "day == 25 and month == 8 and current_location == \"Tech Green\"")
-    $ event("club_fair_collision", "act == 'discover' and day == 25 and month == 8 and current_location == \"Tech Green\"", event.once(), event.only())
-    $ event("game_presentation", "act == 'discover' and theweekday == \"Saturday\" and month == 8 and period == \"Evening\" and current_location == \"Howey\"", event.once(), event.only(), event.depends("club_fair_collision"))
+    $ event("club_fair_collision", "act == 'discover' and day == 24 and month == 8 and current_location == \"Tech Green\"", event.once(), event.only())
+    $ event("game_presentation", "act == 'discover' and theweekday == \"Friday\" and month == 8 and period == \"Evening\" and current_location == \"Howey\"", event.once(), event.only(), event.depends("club_fair_collision"))
     $ event("first_dev_meeting", "act == 'gamedev'", event.once(), event.only(), event.depends("game_presentation"))
 
 
