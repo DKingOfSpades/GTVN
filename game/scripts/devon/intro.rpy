@@ -74,6 +74,9 @@ label game_presentation:
             xsize 1920
             ysize 1080
         with fade
+
+    show lilguy point talk left with moveinbottom:
+        xalign 0.8
     LilGuy "Welcome everyone, to our inaugural VGDev meeting!"
 
     "The room erupts with claps and cheers."

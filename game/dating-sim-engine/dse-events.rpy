@@ -19,7 +19,7 @@ init:
     $ Buzz = Character('Buzz', image="buzz", color="#FFD700")
     $ Winri = Character('Winri', image="winri", color="#B87333")
 
-    $ LilGuy = Character("VGDev President", color="#FF8733")
+    $ LilGuy = Character("LilGuy", image="lilguy", color="#FF8733")
     $ unknown = Character('???', color="#867900")
     $ Professor = Character("Professor", color="#444444")
     $ Ralph = Character('Ralph', image="ralph", color="#FFD700")
