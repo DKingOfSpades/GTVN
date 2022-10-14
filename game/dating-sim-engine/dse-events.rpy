@@ -47,7 +47,7 @@ init:
 
     # These are Buzz's events
     $ event("buzz_first_meeting", "act == 'class'", event.once(), event.only(), priority=40)
-    $ event("buzz_gym_1", "act == 'exercise'", "period == 'evening'", event.once(), event.depends("buzz_work_out"), priority=100)
+    $ event("buzz_gym_1", "act == 'exercise'", "period == 'evening'", event.once(), event.depends("buzz_first_meeting"), priority=100)
     $ event("buzz_dorm_1", "act == 'hang'", "current_location == 'Dorms'", "theweekday == 'Sunday'", "period == 'noon'", event.once(), event.depends("buzz_first_meeting"), priority=180) #possibly placeholder until it has a better spot
 
     # This is an first winri event, that runs once when we first go to class.
