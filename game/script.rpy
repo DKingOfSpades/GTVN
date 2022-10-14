@@ -73,7 +73,7 @@ init -100 python:
 label start:
 
     call intro_faset
-
+    call init_locations
     scene bg dorm:
         xsize 1920
         ysize 1080

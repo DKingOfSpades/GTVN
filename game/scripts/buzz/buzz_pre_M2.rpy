@@ -61,6 +61,13 @@ label buzz_menu_loop:
     return
 
 label buzz_gym_1:
+    $ prev_location_img = current_location_img
+    $ current_location_img = "bg " + current_location.lower() + " exercise"
+    if renpy.has_image(current_location_img) and current_location_img != prev_location_img:
+        scene expression current_location_img:
+            xsize 1920
+            ysize 1080
+        with fade
     Buzz "Hello [player_name], I see that you have come to the Campus Recreation Center."
     Buzz "Do you wish to join me in developing our muscles?"
     menu:
@@ -74,7 +81,6 @@ label buzz_gym_1:
 label work_out_with_buzz1:
     Buzz "Wonderful!" #(insert cg of working out?)
     hide Buzz
-    scene blackscreen with fade
     "I spent the afternoon vigorously working out with Buzz"
     $ AP -= 4
     $ brawn += 15
