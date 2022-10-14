@@ -15,6 +15,8 @@ init -100 python:
     # all events in dse-events.rpy depend on this variable
     AP = 0
 
+    # used_action_array = []
+
     # Morning
     dp_period("Morning", "morning_act")
     dp_choice("Attend Class", "class", show="current_location == \"Boggs\" or current_location == \"Skiles\" or current_location == \"Howey\" or current_location == \"CULC\" or current_location == \"Klaus\"")
@@ -79,6 +81,7 @@ label start:
     stop music
     call bgm_campus_start
     $ current_location = "Dorms"
+    $ current_location_img = ""
     $ current_x = 1568
     $ current_y = 490
     $ AP = 10

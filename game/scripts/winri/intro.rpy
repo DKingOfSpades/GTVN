@@ -1,9 +1,11 @@
 label robot_gal:
+    $ prev_location_img = current_location_img
     $ current_location_img = "bg " + current_location.lower() + " lecture"
-    if renpy.has_image(current_location_img):
+    if renpy.has_image(current_location_img) and current_location_img != prev_location_img:
         scene expression current_location_img:
             xsize 1920
             ysize 1080
+        with fade
 
     "Still can’t get used to how loud it is before lecture."
 

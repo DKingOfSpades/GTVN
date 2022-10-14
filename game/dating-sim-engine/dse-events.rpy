@@ -48,8 +48,8 @@ init:
     $ event("eat", "act == 'eat'", event.solo(), priority=200)
 
     # These are Buzz's events
-    $ event("buzz_first_meeting", "act == 'class'", event.once(), priority=40)
-    $ event("buzz_gym_1", "act == 'exercise'", "period == 'evening'", event.once(), event.depends("buzz_first_meeting"), priority=100)
+    $ event("buzz_first_meeting", "act == 'class'", event.once(), event.only())
+    $ event("buzz_gym_1", "act == 'exercise'", "period == 'evening'", event.once(), event.depends("buzz_first_meeting"), event.only())
     $ event("buzz_dorm_1", "act == 'hang'", "current_location == 'Dorms'", "theweekday == 'Sunday'", "period == 'noon'", event.once(), event.depends("buzz_first_meeting"), priority=180) #possibly placeholder until it has a better spot
 
     # This is an first winri event, that runs once when we first go to class.
@@ -161,6 +161,13 @@ label discover:
     return
 
 label sleep:
+    $ prev_location_img = current_location_img
+    $ current_location_img = "bg dorm"
+    if renpy.has_image(current_location_img) and current_location_img != prev_location_img:
+        scene expression current_location_img:
+            xsize 1920
+            ysize 1080
+        with fade
 
     if AP > 4:
         "Might as well go to sleep early to get some more energy for tomorrow. {w}{b}-2 Fatigue{/b}"
@@ -202,7 +209,14 @@ label eat:
     return
 
 label class:
+    $ prev_location_img = current_location_img
+    $ current_location_img = "bg " + current_location.lower() + " lecture"
 
+    if renpy.has_image(current_location_img) and current_location_img != prev_location_img:
+        scene expression current_location_img:
+            xsize 1920
+            ysize 1080
+        with fade
     "I make it to class just in time, and proceed to listen to the teacher droning on about a wide range of topics, none of which are remotely interesting. {w}{b}+10 BRAIN{/b}"
     $ brain += 10
     $ AP -= 3

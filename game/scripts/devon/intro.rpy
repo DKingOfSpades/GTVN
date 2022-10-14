@@ -55,12 +55,13 @@ label club_fair_collision:
     return
 
 label game_presentation:
+    $ prev_location_img = current_location_img
     $ current_location_img = "bg " + current_location.lower() + " lecture" # Should only ever be Howey, but I'm too lazy to code myself
-    if renpy.has_image(current_location_img):
+    if renpy.has_image(current_location_img) and current_location_img != prev_location_img:
         scene expression current_location_img:
             xsize 1920
             ysize 1080
-
+        with fade
     LilGuy "Welcome everyone, to our inaugural VGDev meeting!"
 
     "The room erupts with claps and cheers."
@@ -74,11 +75,11 @@ label game_presentation:
     LilGuy "Thank you Ren and your game MeteorRise!" with fade
 
     LilGuy "And that was Joon with Grove!" with fade
-    
+
     LilGuy "A round of applause for Andrew and Sanguine Service!" with fade
-    
+
     LilGuy "Thank you Case and Meowlchemy!" with fade
-    
+
     LilGuy "And that was Adbel with Wet!" with fade
 
     "Oh, Devon's finally up." with fade

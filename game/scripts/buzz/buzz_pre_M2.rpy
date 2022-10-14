@@ -3,8 +3,9 @@ label buzz_first_meeting:
 
     #"<building name + room number>? Yup, this is it."
     #(transition to inside lecture hall)
+    $ prev_location_img = current_location_img
     $ current_location_img = "bg " + current_location.lower() + " lecture"
-    if renpy.has_image(current_location_img):
+    if renpy.has_image(current_location_img) and current_location_img != prev_location_img:
         scene expression current_location_img:
             xsize 1920
             ysize 1080
@@ -52,6 +53,9 @@ label buzz_menu_loop:
     Buzz "It seems that our professor has arrived."
     Professor "Welcome to this course. I will be your professor. Please call me Doctor Rose."
     Professor "Today we will be covering the syllabus and some material."
+    "I proceed to listen to the teacher droning on about a wide range of topics, none of which are remotely interesting. {w}{b}+10 BRAIN{/b}"
+    $ brain += 10
+    $ AP -= 3
     # scene blackscreen
     # with fade
     return

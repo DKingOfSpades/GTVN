@@ -45,11 +45,13 @@ label map_scene_change:
         $ AP-=0
     else:
         $ AP-=1
+    $ prev_location_img = current_location_img
     $ current_location_img = "bg " + current_location.lower()
-    if renpy.has_image(current_location_img):
+    if renpy.has_image(current_location_img) and current_location_img != prev_location_img:
         scene expression current_location_img:
             xsize 1920
             ysize 1080
+        with fade
     return
 
 label tech_tower:
