@@ -39,23 +39,8 @@ label club_fair_collision:
             VGDev "Oh, uh, the video game club!"
             VGDev "I’m actually one of the people who’re planning to make games."
             VGDev "We’re all supposed to hand out these flyers."
-            mc "Your stack seems pretty thick."
-            VGDev "Uh, yeah, I actually haven't passed any flyers out."
-            VGDev "Don't wanna come on too strong, y'know?"
-            VGDev "Might scare people away."
-            mc "What game are you planning to make?"
-            "He winces."
-            VGDev "As much as I'd love to tell you that (and I really would LOVE to), we have to keep those a secret."
-            VGDev "I'm really proud of the concept though. You should definitely consider joining me."
-            mc "Can I have a flyer?"
-            VGDev "Sure!"
-            show vgdev poster with moveinbottom:
-                xalign 0.9
-                yalign 0.5
-                zoom 0.5
-            "He hands me a flyer."
-            "VGDev: We make games.{p}Check us out at Howey L3 this Friday Evening!"
-            hide vgdev poster
+            call devon_menu
+
             VGDev "Well, I'll be seeing you!"
             VGDev "Feel free to check out our table for any questions or to meet Little Guy!"
             hide devon
@@ -64,6 +49,34 @@ label club_fair_collision:
         "Be more careful, idiot.":
             "He frowns, picks up his flyers, and runs off."
             "Great work! Just. Stellar job there."
+    return
+label devon_menu:
+    $ all_menu = [True, True, True]
+label devon_menu_loop:
+    menu:
+        "Your stack seems pretty thick." if all_menu[0]:
+            $ all_menu[0] = False
+            VGDev "Uh, yeah, I actually haven't passed any flyers out."
+            VGDev "Don't wanna come on too strong, y'know?"
+            VGDev "Might scare people away."
+            jump devon_menu_loop
+        "What game are you planning to make?" if all_menu[1]:
+            $ all_menu[1] = False
+            "He winces."
+            VGDev "As much as I'd love to tell you that (and I really would LOVE to), we have to keep those a secret."
+            VGDev "I'm really proud of the concept though. You should definitely consider joining me."
+            jump devon_menu_loop
+        "Can I have a flyer?" if all_menu[2]:
+            $ all_menu[2] = False
+            VGDev "Sure!"
+            show vgdev poster with moveinbottom:
+                xalign 0.9
+                yalign 0.5
+                zoom 0.5
+            "He hands me a flyer."
+            "VGDev: We make games.{p}Check us out at Howey L3 this Friday Evening!"
+            hide vgdev poster
+            jump devon_menu_loop
     return
 
 label game_presentation:
@@ -76,29 +89,78 @@ label game_presentation:
         with fade
 
     show lilguy point talk left with moveinbottom:
-        xalign 0.8
+        xoffset 600
     LilGuy "Welcome everyone, to our inaugural VGDev meeting!"
 
+    show lilguy jum smile left
     "The room erupts with claps and cheers."
-
+    show lilguy stand exasperated left
     LilGuy "I will be your club president, Lil Guy. Today, we will be hearing our 6 game leads pitch each of their games."
+    show lilguy point panic left
+    LilGuy "We’re going to let this wheel decide who presents first. On the count of 3, I want everybody to shout “SPIN THAT WHEEL!” with me. Ready? (TODO: wheel animation)"
+    LilGuy "3"
+    LilGuy "2"
+    LilGuy "1"
+    "Everyone" "SPIN THAT WHEEL!"
 
-    LilGuy "We’re going to let this wheel decide who presents first. On the count of 3, I want everybody to shout “SPIN THAT WHEEL!” with me. Ready?"
+    LilGuy "Alright, first up is Ren!"
+    "Ren" "Hello. I’m Ren, and this is MeteorRise."
+    "Ren" "What is MeteorRise you ask?"
+    "Ren" "MeteorRise is a 2nd person bullet hell platform shooter."
+    "Ren" "In this world, witches are set across worlds to cull aliens and angels."
+    "Ren" "Mercenaries of the corporation SERV…"
+    show lilguy jum smile right with move and fade:
+        xoffset -600
+    LilGuy "Thank you Ren and your game MeteorRise!"
+    LilGuy "Moving on! 3! 2! 1!"
+    "Everyone" "SPIN THAT WHEEL!"
+    LilGuy "And our next pitch will be Joon!"
+    "Joon" "Hello everyone. I’m Joon."
+    "Joon" "This is Grove, a mystical 3D bullet hell rogue-like adventure set in a distant grove where an college party is being held."
+    "Joon" "You play as a spirit that will explore the grove and eliminate bad vibes, and…"
+    show lilguy point panic left with move and fade:
+        xoffset 600
+    LilGuy "Thank you very much, Joon. On 1! 3! 2! 1!"
+    "Everyone" "SPIN THAT WHEEL!"
+    LilGuy "And it lands on Android!"
+    "Android" "Uh, hi. This is going to be quick so let’s see if I can do this."
+    "Android" "My game is Sanguine Service. It will be a 3D first person puzzle shooter set in a maid cafe in hell."
+    "Android" "In the story, we are in a dystopian future where our protagonist is playing in a game show with their life on the line."
+    "Ooh, that sounds a little like Octopus Game in certain ways."
+    "Android" "And must serve cold vengance dishes to the angel customers you encounter, while pleasing demons with your cooking…"
+    show lilguy jum pout right with move and fade:
+        xoffset -600
+    LilGuy "A round of applause for Android and Sanguine Service!"
+    LilGuy "Alright, let’s find out who’s next."
+    "Everyone" "SPIN THAT WHEEL!"
+    LilGuy "Next up is Case!"
+    "Case" "Hey, I’m Case, and this is Meowlchemy: The Moment of Catastrophe."
+    "Case" "Meowlchemy is a 3D rougue-like puzzle game with a fantastical cat."
+    "Case" "Her name is Tangerine."
+    "Cute!"
+    "Case" "You'll get to combine wierd and wacky elements to find to create chemical reactions of all sorts."
+    "Case" "As for what we are looking for for our team…"
+    show lilguy point panic left with move and fade:
+        xoffset 600
+    LilGuy "Thank you Case for Meowlchemy!"
+    LilGuy "Only 2 left! Let’s pick up that energy a bit. 3! 2! 1!"
+    "Everyone" "SPIN THAT WHEEL!"
+    LilGuy "And next up we have Abdel!"
+    "Abdel" "Just a heads up, my presentation isn’t going to look as great as everyone else’s"
+    "Abdel" "Moist is a rougelike horror game. Its main mechanic will be travesing the deeps of the sea in your submarine."
+    "Abdel" "Also, Wet will be made in Existential engine"
+    "Oh, so it’s going to be written in C++. That sounds hard."
+    "Abdel" "Now as for design…"
+    show lilguy stand surprise right with move and fade:
+        xoffset -600
+    LilGuy "And that was Adbel with Moist!"
+    LilGuy "And for the last one, say it with me!"
+    "Everyone" "SPIN THAT WHEEL!"
 
-    "A few pitches happen, and they seem generally interesting. But I'm not here for them." with wipe
-
-    LilGuy "Thank you Ren and your game MeteorRise!" with fade
-
-    LilGuy "And that was Joon with Grove!" with fade
-
-    LilGuy "A round of applause for Andrew and Sanguine Service!" with fade
-
-    LilGuy "Thank you Case and Meowlchemy!" with fade
-
-    LilGuy "And that was Adbel with Wet!" with fade
-
-    "Oh, Devon's finally up." with fade
-
+    "Oh, Devon's finally up."
+    hide lilguy
+    show devon neutral at center with moveinright:
+        zoom 0.75
     VGDev "Um, hi."
 
     VGDev "I’m Devon."
@@ -116,6 +178,8 @@ label game_presentation:
     VGDev "This happens to be a massive collaborative effort, between this club, VGDev, Anime O’Tekku, and potentially more as we go on!"
 
     VGDev "Each club will craft their own fictional representation of themselves to put into the game."
+
+    show devon happy
 
     VGDev "Before I show off the demo, I’ve made plenty of time for questions!"
 
@@ -151,8 +215,12 @@ label game_presentation:
 
     "Maybe now’s my time to step in."
 
+    $ helped = False
+
     menu:
         "Help him":
+            show devon cheerful
+
             VGDev "Yes, you in the back?"
 
             "Alright!"
@@ -170,8 +238,12 @@ label game_presentation:
             "Alright, alright! Looks like the room is talking now!"
 
             VGDev "Here’s a quick demo! Enjoy~"
+
+            $ helped = True
         "Leave him":
             "Nah, he can handle this."
+
+            show devon neutral
 
             "..."
 
@@ -181,6 +253,7 @@ label game_presentation:
 
             VGDev "...anyways, here’s the demo."
 
+    show devon cheerful
     "Alright, time to see how this is gonna look."
 
     "Oh, original intro music?"
@@ -205,33 +278,40 @@ label game_presentation:
 
     "Huh. Doesn’t seem like too many people are getting their phones out. Wonder why."
 
-    "The rest of the presentations pass by normally, and the meeting ends with energy." with wipe
+    "The rest of the presentations pass by normally, and the meeting ends with energy."
+
+    show devon neutral
 
     "Okay, better go congratulate him."
 
     "He did well, especially considering how reserved he seemed when we first met."
 
+    show devon happy
+
     VGDev "Oh, hi."
 
     VGDev "...wait a minute."
 
-    VGDev "It’s you! The guy who shoved me during the org fair!"
+    show devon neutral
 
-    "Yikes, these glares are going right through me."
+    VGDev "It’s you! I bumped into you at the org fair!"
 
-    "Better clarify."
+    if helped:
+        show devon happy
+        VGDev "T-thanks for the help."
+        VGDev "I uh, wasn’t expecting that."
+    show devon neutral
+    VGDev "Thanks for swinging by! How did you like the demo? I've been working on it myself for a week now."
 
-    mc "D-don't worry. It was an accident. We're chill."
-
-    "The glares soften and everyone turns back to Devon."
+    mc "I loved it! I hope we can work together on this!"
 
     VGDev "Alright, what years are you all in?"
 
-    "First."
+    "A" "First."
 
-    "First year!"
+    "B" "First year!"
 
-    "Freshman..."
+    "C" "Freshman..."
 
     "Interesting. Only first years. Wonder why."
 
@@ -250,6 +330,8 @@ label game_presentation:
     "It's [player_name]."
 
     "Alright. Thanks again!"
+
+    hide devon
     return
 
 label first_dev_meeting:

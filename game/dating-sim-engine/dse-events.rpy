@@ -58,6 +58,7 @@ init:
 
     # This is an first otekku event, that runs once when we first discover.
     $ event("biscord_gremlin", "act == 'discover'", event.once(), event.only())
+    $ event("anigang", "act == 'class' and theweekday == \"Friday\" and period == \"Noon\" and current_location == \"Klaus\"", event.once(), event.depends("biscord_gremlin"),event.only())
 
     # ralph the rambling wreck
     $ event("hit_and_run", "act == 'travel' and current_location == 'Tech Green' and period != 'night'", event.once(), event.only())

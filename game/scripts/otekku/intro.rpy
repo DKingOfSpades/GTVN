@@ -58,3 +58,11 @@ label biscord_gremlin:
 
     $ AP -= 4
     return
+
+label anigang:
+    show otekku neutral at center with moveinbottom:
+        zoom 0.25
+    Otekku "hey ur xX_burdelli_Xx right"
+    "TODO: finish writing this part"
+    hide otekku
+    return
