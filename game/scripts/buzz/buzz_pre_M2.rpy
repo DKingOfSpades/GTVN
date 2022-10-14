@@ -1,6 +1,6 @@
 label buzz_first_meeting:
     #(in hallway)
-    
+
     #"<building name + room number>? Yup, this is it."
     #(transition to inside lecture hall)
     scene bg culc lecture:
@@ -24,18 +24,18 @@ label buzz_first_meeting:
     Buzz "My name is Nathan Harrison, but everyone calls me Buzz. This is my second year."
     "I’m [player_name], first year, nice to meet you Buzz."
     Buzz "Nice to meet you!" #(big smile)
-    menu: 
+    menu:
         "If you don’t mind me asking, what’s going on with your head?":
-            jump buzz_head
+            call buzz_head
         "You seem to really like working out, eh?":
-            jump buzz_work_out
+            call buzz_work_out
         "So where are you from?":
-            jump buzz_origin
+            call buzz_origin
     Buzz "It seems that our professor has arrived."
     Professor "Welcome to this course. I will be your professor. Please call me Doctor Rose."
     Professor "Today we will be covering the syllabus and some material."
     scene blackscreen
-    with fadeout
+    with fade
     return
 
 label buzz_head:
@@ -59,7 +59,7 @@ label buzz_origin:
     return
 
 label buzz_gym_1:
-    Buzz "Hello [player_name], I see that you have come to the Campus Recreation Center." 
+    Buzz "Hello [player_name], I see that you have come to the Campus Recreation Center."
     Buzz "Do you wish to join me in developing our muscles?"
     menu:
         "Oh, I’d love to!":
@@ -107,9 +107,9 @@ label buzz_dorm_1:
         "Sorry, I actually have something I need to do":
             jump no_dorm_tour
     return
-    
+
 label no_dorm_tour:
-    Buzz "Oh… that is a shame." #(disappointed expression) 
+    Buzz "Oh… that is a shame." #(disappointed expression)
     Buzz "Well then, until we meet again, Burdell."
     "See you later."
     hide Buzz with fade
