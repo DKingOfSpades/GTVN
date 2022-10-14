@@ -17,7 +17,7 @@ label hit_and_run:
 
     "What is my luck today?"
 
-    mc "HEY! Watch where u are going!"
+    mc "HEY! Watch where u are going!" with hpunch
 
     show ralph at passerby
 
