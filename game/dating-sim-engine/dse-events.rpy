@@ -18,6 +18,7 @@ init:
     $ VGDev = Character('VGDev-san', image="vgdev", color="#64C617")
     $ Buzz = Character('Buzz', image="buzz", color="#FFD700")
     $ Winri = Character('Winri', image="winri", color="#B87333")
+    $ Ralph = Character('Ralph', image="ralph", color="#FFD700")
 
 init:
     # First up, we define some simple events for the various actions, that
@@ -48,6 +49,8 @@ init:
 
     # This is an first otekku event, that runs once when we first discover.
     $ event("biscord_gremlin", "act == 'discover'", event.once(), event.only())
+
+    $ event("hit_and_run", "act == 'travel' and current_location == 'Tech Green' and period != 'night'", event.once(), event.only())
 
     # These are the events with glasses girl.
     #
