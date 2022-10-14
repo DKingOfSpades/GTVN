@@ -71,7 +71,17 @@ label game_presentation:
 
     "A few pitches happen, and they seem generally interesting. But I'm not here for them."
 
-    "Oh, Devon's finally up."
+    LilGuy "Thank you Ren and your game MeteorRise!" with fade
+
+    LilGuy "And that was Joon with Grove!" with fade
+    
+    LilGuy "A round of applause for Andrew and Sanguine Service!" with fade
+    
+    LilGuy "Thank you Case and Meowlchemy!" with fade
+    
+    LilGuy "And that was Adbel with Wet!" with fade
+
+    "Oh, Devon's finally up." with fade
 
     VGDev "Um, hi."
 
