@@ -11,7 +11,7 @@ init -100 python:
 
     Locations = []
 
-
+    # do not add locations in the middle of this append list, always at the end
     Locations.append(Location(1130, 660, "Tech Tower", "tech_tower", True))
     Locations.append(Location(1678, 958, "North Ave Dining", "north_ave_dining", True))
     Locations.append(Location(1299, 549, "Bobby Dodd Stadium", "bobby_dodd_stadium", False))

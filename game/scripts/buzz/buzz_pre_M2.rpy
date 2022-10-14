@@ -3,10 +3,12 @@ label buzz_first_meeting:
 
     #"<building name + room number>? Yup, this is it."
     #(transition to inside lecture hall)
-    scene bg culc lecture:
-        subpixel True
-        xzoom 1.75 yzoom 1.75 zoom 1.5
-    with fade
+    $ current_location_img = "bg " + current_location.lower() + " lecture"
+    if renpy.has_image(current_location_img):
+        scene expression current_location_img:
+            xsize 1920
+            ysize 1080
+        with fade
     "Alright, 5 minutes until lecture begins."
     unknown "EXCUSE ME FELLOW STUDENT" #(1st run dialogue)
     mc "!" with hpunch
@@ -50,8 +52,8 @@ label buzz_menu_loop:
     Buzz "It seems that our professor has arrived."
     Professor "Welcome to this course. I will be your professor. Please call me Doctor Rose."
     Professor "Today we will be covering the syllabus and some material."
-    scene blackscreen
-    with fade
+    # scene blackscreen
+    # with fade
     return
 
 label buzz_gym_1:
@@ -59,11 +61,11 @@ label buzz_gym_1:
     Buzz "Do you wish to join me in developing our muscles?"
     menu:
         "Oh, I’d love to!":
-            jump work_out_with_buzz1
+            call work_out_with_buzz1
         "Sure, why not":
-            jump work_out_with_buzz2
+            call work_out_with_buzz2
         "I’m only here to check out the place.":
-            jump check_out_gym
+            call check_out_gym
     return
 label work_out_with_buzz1:
     Buzz "Wonderful!" #(insert cg of working out?)

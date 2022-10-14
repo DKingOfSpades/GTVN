@@ -6,7 +6,7 @@ label club_fair_collision:
 
     "It's hard to figure out where anything is."
 
-    "*bump*"
+    "!!" with hpunch
 
     "Shoot. Did I bump into someone?"
 
@@ -14,15 +14,15 @@ label club_fair_collision:
 
     "I saw a flash of green and a panicked expression."
 
-    "???" "Owww..."
+    unknown "Owww..."
 
-    mc "Oh, it's a guy with green hair. Holding flyers? Or well, he probably was before I knocked him over."
+    "Oh, it's a guy with green hair. Holding flyers? Or well, he probably was before I knocked him over."
 
     "That's smart. You don't have to go to them, cause they go to you."
 
     "Might as well hear what’s up with his club after giving him so much trouble."
 
-    "His nametag says...Dev."
+    "His nametag says...Devon."
 
     VGDev "S-sorry about that!"
 
@@ -44,7 +44,7 @@ label club_fair_collision:
             mc "Can I have a flyer?"
             VGDev "Sure!"
             "He hands you a flyer."
-            "VGDev: We make games.{p}Check us out at Howey L3 this Saturday!"
+            "VGDev: We make games.{p}Check us out at Howey L3 this Friday Evening!"
             VGDev "Well, I'll be seeing you!"
             VGDev "Feel free to check out our table for any questions or to meet Little Guy!"
         "It's fine, see you around.":
@@ -71,7 +71,17 @@ label game_presentation:
 
     "A few pitches happen, and they seem generally interesting. But I'm not here for them." with wipe
 
-    "Oh, Devon's finally up."
+    LilGuy "Thank you Ren and your game MeteorRise!" with fade
+
+    LilGuy "And that was Joon with Grove!" with fade
+    
+    LilGuy "A round of applause for Andrew and Sanguine Service!" with fade
+    
+    LilGuy "Thank you Case and Meowlchemy!" with fade
+    
+    LilGuy "And that was Adbel with Wet!" with fade
+
+    "Oh, Devon's finally up." with fade
 
     VGDev "Um, hi."
 
@@ -170,7 +180,7 @@ label game_presentation:
     "I can only imagine how fun this game is gonna be once he has a whole team at his fingertips!"
 
     "Alright, the place is a good bit more fired up!"
-    
+
     "He’s definitely going to have at least a few people on board!"
 
     VGDev "And here’s the QR code for the Biscord server!"
