@@ -6,6 +6,9 @@ label club_fair_collision:
 
     "It's hard to figure out where anything is."
 
+    show devon neutral at center with moveinright:
+        zoom 0.75
+
     "!!" with hpunch
 
     "Shoot. Did I bump into someone?"
@@ -24,12 +27,15 @@ label club_fair_collision:
 
     "His nametag says...Devon."
 
+    show devon happy
+
     VGDev "S-sorry about that!"
 
     VGDev "I really need to look where I’m going…"
 
     menu:
         "It's fine, what club are you advertising for?":
+            show devon cheerful
             VGDev "Oh, uh, the video game club!"
             VGDev "I’m actually one of the people who’re planning to make games."
             VGDev "We’re all supposed to hand out these flyers."
@@ -43,10 +49,16 @@ label club_fair_collision:
             VGDev "I'm really proud of the concept though. You should definitely consider joining me."
             mc "Can I have a flyer?"
             VGDev "Sure!"
-            "He hands you a flyer."
+            show vgdev poster with moveinbottom:
+                xalign 0.9
+                yalign 0.5
+                zoom 0.5
+            "He hands me a flyer."
             "VGDev: We make games.{p}Check us out at Howey L3 this Friday Evening!"
+            hide vgdev poster
             VGDev "Well, I'll be seeing you!"
             VGDev "Feel free to check out our table for any questions or to meet Little Guy!"
+            hide devon
         "It's fine, see you around.":
             VGDev "Oh, uh, bye!"
         "Be more careful, idiot.":
