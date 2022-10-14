@@ -13,3 +13,12 @@ screen map_screen():
                     activate_sound("audio/sfx_ui_button_select.mp3") # sound when clicked
                     hover_sound("audio/sfx_ui_button.mp3") #sound when hovered
                     action [SetVariable("current_location", l.name), SetVariable("current_x", l.x), SetVariable("current_y", l.y), Jump("map_scene_change")]
+        textbutton "Switch themes?":
+            xalign 0.9
+            yalign 0.1
+            activate_sound("audio/sfx_ui_button_select.mp3") # sound when clicked
+            hover_sound("audio/sfx_ui_button.mp3") #sound when hovered
+            if renpy.music.get_playing(channel="bgm_morning") == "audio/bgm_campus_morning.mp3":
+                action Jump("bgm_tech_square_start")
+            else:
+                action Jump("bgm_campus_start")
