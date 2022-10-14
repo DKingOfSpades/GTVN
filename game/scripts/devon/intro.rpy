@@ -69,7 +69,7 @@ label game_presentation:
 
     LilGuy "We’re going to let this wheel decide who presents first. On the count of 3, I want everybody to shout “SPIN THAT WHEEL!” with me. Ready?"
 
-    "A few pitches happen, and they seem generally interesting. But I'm not here for them."
+    "A few pitches happen, and they seem generally interesting. But I'm not here for them." with wipe
 
     "Oh, Devon's finally up."
 
@@ -179,7 +179,7 @@ label game_presentation:
 
     "Huh. Doesn’t seem like too many people are getting their phones out. Wonder why."
 
-    "The rest of the presentations pass by normally, and the meeting ends with energy."
+    "The rest of the presentations pass by normally, and the meeting ends with energy." with wipe
 
     "Okay, better go congratulate him."
 
@@ -227,4 +227,79 @@ label game_presentation:
     return
 
 label first_dev_meeting:
-    "Filler"
+    "Alright, I'm here."
+
+    "I can't say the place is packed, but there's still a good few people here."
+
+    "Oh, Devon waved."
+
+    "Seems like he's about to start."
+
+    "I'll just find a seat..."
+
+    VGDev "Hi everyone."
+
+    VGDev "This'll be the first meeting for QSVN."
+
+    VGDev "So far, I have a form ready to catalog what everyone wants to do."
+
+    VGDev "I'll post it in the Biscord."
+
+    VGDev "Anyways, here's some of my goals for this development cycle."
+
+    VGDev "I want a few more weeks, obviously."
+
+    VGDev "I also want a soundtrack beyond one song."
+
+    VGDev "Finally, I want some more enemies."
+
+    VGDev "I've created a Drello board for all the tasks I want to get done."
+
+    VGDev "Once you all sign up, we can use the Biscord to assign specific tasks."
+
+    VGDev "I'll monitor you all as you progress."
+
+    VGDev "Remember, get your things done in a timely manner, everyone!"
+
+    VGDev "If we want this game to reach its initial goal quickly, we will need everyone to finish their individual tasks quickly."
+
+    VGDev "If we do that, we can add even more to the game, and go beyond my initial vision."
+
+    VGDev "But. I’m getting ahead of myself."
+
+    VGDev "Here's a bit of information regarding what I want from the game."
+
+    with fade
+
+    "Wow, this is a lot of detail."
+
+    "Can't call this a bit of information in any stretch of the imagination."
+
+    "He seems pretty deadset on what he wants from the game."
+
+    "Wonder how the others feel..."
+
+    "...hey, where'd some of them go?"
+
+    "And why do the others look so angry?"
+
+    "I'll have to ask one of them as we go out."
+
+    with fade
+
+    VGDev "Alright, that's about all I have for you! Meeting adjourned!"
+
+    "As people leave, they mumble complaints among themselves."
+
+    "\"I thought I'd get to contribute...\""
+
+    "\"I had some great ideas...\""
+
+    "\"I wanted to put ඞ into the game...\""
+
+    "I'll ignore wondering how you say that."
+
+    "Point is, seems like people aren't getting what they wanted out of this."
+
+    "Perhaps I should broach the topic with Devon the next time we speak."
+    return
