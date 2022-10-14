@@ -17,6 +17,8 @@ init:
     $ Otekku = Character('O\'Tekku-chan', image="otekku", color="#FFD700")
     $ VGDev = Character('VGDev-san', image="vgdev", color="#64C617")
     $ Buzz = Character('Buzz', image="buzz", color="#FFD700")
+    $ unknown = Character('?', color="#867900")
+    $ Professor = Character("Professor", color="#444444")
     $ Winri = Character('Winri', image="winri", color="#B87333")
     $ Ralph = Character('Ralph', image="ralph", color="#FFD700")
 
@@ -27,6 +29,7 @@ init:
     $ event("class", "act == 'class'", event.only(), priority=200)
     $ event("class_bad", "act == 'class'", priority=210)
     $ event("study", "act == 'study'", event.solo(), priority=200)
+    $ event("hang", "act == 'hang'", event.solo(), priority=200)
     $ event("exercise", "act == 'exercise'", event.solo(), priority=200)
 
 
@@ -42,6 +45,10 @@ init:
     $ event("sleepin", "act == 'sleepin'", event.only(), priority=200)
     $ event("eat", "act == 'eat'", event.solo(), priority=200)
 
+    # These are Buzz's events
+    $ event("buzz_first_meeting", "act == 'class'", event.once(), priority=40)
+    $ event("buzz_gym_1", "act == 'exercise'", "period == 'evening'", event.once(), event.depends("buzz_work_out"), priority=100)
+    $ event("buzz_dorm_1", "act == 'hang'", "current_location == 'Dorms'", "theweekday == 'Sunday'", "period == 'noon'", event.once(), event.depends("buzz_first_meeting"), priority=180) #possibly placeholder until it has a better spot
 
     # This is an first winri event, that runs once when we first go to class.
     $ event("robot_gal", "act == 'class'", event.once(), event.only())
