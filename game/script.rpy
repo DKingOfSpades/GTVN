@@ -44,6 +44,7 @@ init -100 python:
     # Evening
     dp_period("Evening", "evening_act")
     dp_choice("Attend Lecture", "class", show="current_location == \"Boggs\" or current_location == \"Skiles\" or current_location == \"Howey\" or current_location == \"CULC\"")
+    dp_choice("Go to Game Dev Meeting", "gamedev", show="current_location == \"CULC\" and theweekday == \"Saturday\"")
     dp_choice("Eat", "eat", show="\"Dining\" in current_location")
     dp_choice("Study", "study", show="\"Dorm\" in current_location or current_location == \"Crossland\" or current_location == \"CULC\" or current_location == \"Student Center\"")
     dp_choice("Exercise", "exercise", show="\"Dorm\" in current_location or current_location == \"Tech Green\" or current_location == \"Burger Bowl\" or current_location == \"Campus Recreation Center\"")

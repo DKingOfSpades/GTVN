@@ -17,10 +17,9 @@ init:
     $ Otekku = Character('O\'Tekku-chan', image="otekku", color="#FFD700")
     $ VGDev = Character('VGDev-san', image="vgdev", color="#64C617")
     $ Buzz = Character('Buzz', image="buzz", color="#FFD700")
-    $ unknown = Character('?', color="#867900")
-    $ Professor = Character("Professor", color="#444444")
     $ Winri = Character('Winri', image="winri", color="#B87333")
-    $ Ralph = Character('Ralph', image="ralph", color="#FFD700")
+
+    $ LilGuy = Character("VGDev President", color="#FF8733")
 
 init:
     # First up, we define some simple events for the various actions, that
@@ -29,7 +28,6 @@ init:
     $ event("class", "act == 'class'", event.only(), priority=200)
     $ event("class_bad", "act == 'class'", priority=210)
     $ event("study", "act == 'study'", event.solo(), priority=200)
-    $ event("hang", "act == 'hang'", event.solo(), priority=200)
     $ event("exercise", "act == 'exercise'", event.solo(), priority=200)
 
 
@@ -57,7 +55,11 @@ init:
     # This is an first otekku event, that runs once when we first discover.
     $ event("biscord_gremlin", "act == 'discover'", event.once(), event.only())
 
-    $ event("hit_and_run", "act == 'travel' and current_location == 'Tech Green' and period != 'night'", event.once(), event.only())
+    # vgdev events
+    # $ event ("club_fair_day", "day == 25 and month == 8 and current_location == \"Tech Green\"")
+    $ event("club_fair_collision", "act == 'discover' and day == 25 and month == 8 and current_location == \"Tech Green\"", event.once())
+    $ event("game_presentation", "act == 'discover' and theweekday == \"Saturday\" and month == 8 and period == \"Evening\" and current_location == \"Howey\"", event.once(), event.only(), event.depends("club_fair_collision"))
+    $ event("first_dev_meeting", "act == 'gamedev'", event.once(), event.only(), event.depends("game_presentation"))
 
     # These are the events with glasses girl.
     #
