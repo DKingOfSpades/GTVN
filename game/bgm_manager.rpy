@@ -75,6 +75,14 @@ label bgm_buzz_start:
     $ renpy.music.play("audio/bgm_buzz_phonk.mp3", channel="bgm_night", loop=True, synchro_start=True, fadein=1)
     return
 
+label bgm_winri_start:
+    $ music_to_return = music_playing
+    $ renpy.music.play("audio/bgm_winri.mp3", channel="bgm_morning", loop=True, synchro_start=True, fadein=1)
+    $ renpy.music.play("audio/bgm_winri.mp3", channel="bgm_noon", loop=True, synchro_start=True, fadein=1)
+    $ renpy.music.play("audio/bgm_winri.mp3", channel="bgm_evening", loop=True, synchro_start=True, fadein=1)
+    $ renpy.music.play("audio/bgm_winri.mp3", channel="bgm_night", loop=True, synchro_start=True, fadein=1)
+    return
+
 label bgm_char_end:
     if (music_to_return == "campus"):
         call bgm_campus_start
