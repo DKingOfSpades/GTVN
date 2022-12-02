@@ -77,6 +77,7 @@ label lend_a_hand:
 
     show winri laugh at center with moveinleft:
         zoom 0.45
+    call bgm_winri_start
 
     Winri "Hello! Sorry! I thought you were one of the RJ  members. I swear one of them is always here. I’m Winri! You are….?"
 
@@ -159,6 +160,7 @@ label lend_a_hand:
             show winri disheveled
             Winri "You know what, it’s fine. Though, this place isn’t really for people to be wandering through.{w}Come look for the RoboJackets at the Org Fair that’s coming up okay?"
     hide winri
+    call bgm_char_end
     "She walks me to the door and waves me off. I think I see her freeze for a moment through the glass."
     "But-{w} can she even leave here?"
     "Maybe I should try looking for ways to help Winri out."

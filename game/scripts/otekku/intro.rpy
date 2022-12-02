@@ -9,6 +9,7 @@ label biscord_gremlin:
     mc_nvl "Hey I’m [player_name], first year [major] undergrad. I like all sorts of anime, and read a little bit of manga too."
     mel_nvl "welcome to the club [first_name]!"
     finn_nvl "Whaddup"
+    call bgm_otekku_start
     hachiko_nvl "freshman gang! i've been lurking in this server for a while until I got into Tech. My name is Hachiko, 1st year CS major"
     hachiko_nvl "i also watch and read all sorts of stuff, can't really chose a specific genre to be a fav tho"
     hachiko_nvl "what kind of shows are ur favorite {b}@xX_burdelli_Xx{/b}?"
@@ -57,12 +58,15 @@ label biscord_gremlin:
     $ Locations[6].is_active = True
 
     $ AP -= 4
+    call bgm_char_end
     return
 
 label anigang:
     show otekku neutral at center with moveinbottom:
         zoom 0.25
+    call bgm_otekku_start
     Otekku "hey ur xX_burdelli_Xx right"
     "TODO: finish writing this part"
     hide otekku
+    call bgm_char_end
     return

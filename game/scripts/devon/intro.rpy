@@ -8,7 +8,7 @@ label club_fair_collision:
 
     show devon neutral at center with moveinright:
         zoom 0.75
-
+    call bgm_devon_start
     "!!" with hpunch
 
     "Shoot. Did I bump into someone?"
@@ -77,6 +77,7 @@ label devon_menu_loop:
             "VGDev: We make games.{p}Check us out at Howey L3 this Friday Evening!"
             hide vgdev poster
             jump devon_menu_loop
+    call bgm_char_end
     return
 
 label game_presentation:
@@ -161,6 +162,7 @@ label game_presentation:
     hide lilguy
     show devon neutral at center with moveinright:
         zoom 0.75
+    call bgm_devon_start
     VGDev "Um, hi."
 
     VGDev "I’m Devon."
@@ -332,6 +334,8 @@ label game_presentation:
     "Alright. Thanks again!"
 
     hide devon
+    call bgm_char_end
+
     return
 
 label first_dev_meeting:

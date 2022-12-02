@@ -11,12 +11,16 @@ label buzz_first_meeting:
             ysize 1080
         with fade
     "Alright, 5 minutes until lecture begins."
+    call bgm_buzz_start
     unknown "EXCUSE ME FELLOW STUDENT" #(1st run dialogue)
     mc "!" with hpunch
     #(screen rattle)
     unknown "Apologies my fellow student, I have startled you."
     #unknown "Greetings." (after completing 1 route)
     #(show Buzz with a pan up) figure this out later
+    show buzz neutral at center with moveinbottom:
+        zoom 1.5
+    call bgm_buzz_start
     "Woah, he’s huge. And that head…?"
     mc "Oh no, I’m fine. What do you need?"
     "Is he… the school’s mascot? Is that really just a costume? But it looks so real. Is he even human then? Is-"
@@ -54,6 +58,8 @@ label buzz_menu_loop:
     Professor "Welcome to this course. I will be your professor. Please call me Doctor Rose."
     Professor "Today we will be covering the syllabus and some material."
     "I proceed to listen to the teacher droning on about a wide range of topics, none of which are remotely interesting. {w}{b}+10 BRAIN{/b}"
+    hide buzz
+    call bgm_char_end
     $ brain += 10
     $ AP -= 3
     # scene blackscreen
@@ -68,6 +74,8 @@ label buzz_gym_1:
             xsize 1920
             ysize 1080
         with fade
+    show buzz
+    call bgm_buzz_start
     Buzz "Hello [player_name], I see that you have come to the Campus Recreation Center."
     Buzz "Do you wish to join me in developing our muscles?"
     menu:
@@ -99,6 +107,7 @@ label check_out_gym:
     "Later."
     hide Buzz
     with wipe
+    call bgm_char_end
     "I explored the CRC and saw the various machines and the pools."
     $ AP -= 1
     return
