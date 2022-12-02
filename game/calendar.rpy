@@ -25,7 +25,8 @@ init python:
     def date_overlay():
         if show_date:
             ui.text("%s" % (current_location), xalign=1.0, yalign=0.07)
-            ui.text("%s %s" % (theweekday, period), xalign=1.0, yalign=0.035)
+            ui.image ("%s" % "/gui/weekday/" + theweekday + ".png", xalign=1.0, yalign=0.035)
+            # ui.text("%s %s" % (theweekday, period), xalign=1.0, yalign=0.035)
             ui.text("%s/%s" % (month, day), xalign=1.0, yalign=0.0)
             # ui.image ("%s" % theweekday + ".png", xalign=1.0, yalign=0.035)
             # ui.image ("%s" % month + ".png", xalign=0.965, yalign=0.0)
