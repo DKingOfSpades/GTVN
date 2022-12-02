@@ -8,7 +8,7 @@ label club_fair_collision:
 
     show devon neutral at center with moveinright:
         zoom 0.75
-    call bgm_devon_start
+    call bgm_vgdev_start
     "!!" with hpunch
 
     "Shoot. Did I bump into someone?"
@@ -162,7 +162,7 @@ label game_presentation:
     hide lilguy
     show devon neutral at center with moveinright:
         zoom 0.75
-    call bgm_devon_start
+    call bgm_vgdev_start
     VGDev "Um, hi."
 
     VGDev "I’m Devon."
