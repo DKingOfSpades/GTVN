@@ -12,7 +12,7 @@
 ##
 ## The _() surrounding the string marks it as eligible for translation.
 
-define config.name = _("GTVN (working title)")
+define config.name = _("LuvStung: Guide to Enamoring Club Hearts") # also known as GTVN
 
 
 ## Determines if the title given above is shown on the main menu screen. Set
@@ -23,13 +23,33 @@ define gui.show_name = False
 
 ## The version of the game.
 
-define config.version = "1.0"
+define config.version = "1.3"
 
 
 ## Text that is placed on the game's about screen. Place the text between the
 ## triple-quotes, and leave a blank line between paragraphs.
 
 define gui.about = _p("""
+Credits:
+
+Kevin Xiao- Project Lead
+
+Prince Bull- Art Lead
+
+John Zhang- Writing Lead
+
+Abdul Sayed- Programming Lead
+
+Jacob Zeigler- Music Lead
+
+Artists: Leon Tsai, Jessica Li, Chistopher Lee, Linsey Chen, Luke Choi
+
+Writers: Vijay, Akki Easley, Josh Zhang
+
+Programmers: Chistopher Lee, Kevin Xiao
+
+Musicians: Vijay
+
 """)
 
 
